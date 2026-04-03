@@ -1,0 +1,2492 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics with Ms. Eman Omar | فيزياء مع أ. إيمان عمر</title>
+<!-- Social Sharing -->
+<meta property="og:title" content="Ms. Eman Omar Physics Platform">
+<meta property="og:description" content="Advanced Physics Interactive Academy.">
+<meta property="og:image" content="logo-sharing.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="logo-sharing.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ===== GLOBAL VARIABLES ===== */
+:root {
+  --bg-primary: #020818;
+  --bg-secondary: #060d24;
+  --neon-cyan: #00f5ff;
+  --neon-purple: #b44fff;
+  --neon-gold: #ffd700;
+  --neon-pink: #ff006e;
+  --text-primary: #e8f4ff;
+  --text-secondary: #8baac8;
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(0,245,255,0.15);
+  --card-bg: rgba(6,15,40,0.8);
+  --whatsapp-green: #25d366;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', 'Poppins', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  direction: ltr; /* Changed to ltr as default */
+}
+
+/* ===== CANVAS BACKGROUND ===== */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== FLOATING EQUATIONS ===== */
+.floating-equations {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.eq {
+  position: absolute;
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(10px, 1.2vw, 14px);
+  color: rgba(0,245,255,0.08);
+  white-space: nowrap;
+  animation: floatEq linear infinite;
+}
+
+@keyframes floatEq {
+  0% { transform: translateY(110vh) rotate(-10deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-10vh) rotate(10deg); opacity: 0; }
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 4vw;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(2, 8, 24, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,245,255,0.1);
+  transition: all 0.3s;
+}
+
+nav.scrolled {
+  height: 60px;
+  background: rgba(2, 8, 24, 0.97);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 20px rgba(0,245,255,0.4);
+  animation: pulse-logo 3s ease-in-out infinite;
+}
+
+@keyframes pulse-logo {
+  0%,100% { box-shadow: 0 0 20px rgba(0,245,255,0.4); }
+  50% { box-shadow: 0 0 40px rgba(0,245,255,0.8), 0 0 80px rgba(180,79,255,0.3); }
+}
+
+.logo-text { line-height: 1.1; }
+.logo-text .ar { font-family: 'Cairo'; font-weight: 900; font-size: 14px; color: var(--neon-cyan); }
+.logo-text .en { font-family: 'Orbitron'; font-size: 9px; color: var(--text-secondary); letter-spacing: 2px; }
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  color: var(--neon-cyan);
+  background: rgba(0,245,255,0.08);
+}
+
+.lang-toggle {
+  background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(180,79,255,0.15));
+  border: 1px solid rgba(0,245,255,0.3);
+  color: var(--neon-cyan);
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Orbitron';
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+
+.lang-toggle:hover {
+  background: linear-gradient(135deg, rgba(0,245,255,0.3), rgba(180,79,255,0.3));
+  box-shadow: 0 0 20px rgba(0,245,255,0.3);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+}
+.hamburger span {
+  display: block; width: 25px; height: 2px;
+  background: var(--neon-cyan);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* ===== HERO SECTION ===== */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 5vw 40px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* .hero-text { } - Removed empty ruleset */
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,245,255,0.1);
+  border: 1px solid rgba(0,245,255,0.3);
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--neon-cyan);
+  margin-bottom: 24px;
+  animation: fadeSlideUp 0.8s ease forwards;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.hero-title-ar {
+  font-family: 'Cairo';
+  font-weight: 900;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.2;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff 0%, var(--neon-cyan) 50%, var(--neon-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeSlideUp 0.8s 0.1s ease forwards;
+  opacity: 0;
+}
+
+.hero-title-en {
+  font-family: 'Orbitron';
+  font-size: clamp(14px, 2vw, 20px);
+  color: var(--neon-gold);
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  animation: fadeSlideUp 0.8s 0.2s ease forwards;
+  opacity: 0;
+}
+
+.hero-desc {
+  font-size: clamp(14px, 1.5vw, 17px);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  animation: fadeSlideUp 0.8s 0.3s ease forwards;
+  opacity: 0;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 36px;
+  animation: fadeSlideUp 0.8s 0.4s ease forwards;
+  opacity: 0;
+}
+
+.stat-item { text-align: center; }
+.stat-num {
+  display: block;
+  font-family: 'Orbitron';
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px rgba(0,245,255,0.5);
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.8s 0.5s ease forwards;
+  opacity: 0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  color: var(--bg-primary);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Cairo';
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 0 30px rgba(0,245,255,0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0,245,255,0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0,245,255,0.4);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Cairo';
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  background: rgba(0,245,255,0.1);
+  border-color: var(--neon-cyan);
+  transform: translateY(-3px);
+}
+
+/* HERO RIGHT - Teacher card */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.teacher-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  animation: fadeSlideUp 0.8s 0.3s ease forwards;
+  opacity: 0;
+}
+
+.teacher-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-gold), var(--neon-cyan));
+  background-size: 300% 300%;
+  animation: borderGlow 4s linear infinite;
+  z-index: -1;
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.teacher-card-inner {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+}
+
+.teacher-img-wrap {
+  width: 100%;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(180,79,255,0.1));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 80px;
+}
+
+/* Hero Multi-Layered Design */
+#hero {
+  min-height: 100vh;
+  position: relative;
+  background: url('hero.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg-primary) 30%, transparent 60%),
+              linear-gradient(0deg, var(--bg-primary) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.hero-glass-card {
+  background: rgba(6, 13, 36, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(180, 79, 255, 0.2);
+  border-radius: 32px;
+  padding: 50px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+.about-grid-box {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 30px;
+  padding: 50px;
+  backdrop-filter: blur(15px);
+  box-shadow: inset 0 0 20px rgba(180,79,255,0.05);
+}
+
+.about-text h2 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+}
+
+.teacher-name {
+  font-family: 'Orbitron';
+  font-size: 18px;
+  color: var(--neon-cyan);
+  text-align: center;
+  margin-top: 16px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(0,245,255,0.5);
+}
+
+.teacher-title {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.floating-tags {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+.f-tag {
+  position: absolute;
+  background: rgba(0,245,255,0.1);
+  border: 1px solid rgba(0,245,255,0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: 'Orbitron';
+  color: var(--neon-cyan);
+  white-space: nowrap;
+  animation: floatTag 3s ease-in-out infinite;
+}
+
+.f-tag:nth-child(1) { top: 20%; right: -60px; animation-delay: 0s; }
+.f-tag:nth-child(2) { top: 50%; right: -80px; animation-delay: 0.7s; }
+.f-tag:nth-child(3) { top: 70%; right: -70px; animation-delay: 1.4s; }
+
+@keyframes floatTag {
+  0%,100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-8px) translateX(5px); }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTION COMMON ===== */
+section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 5vw;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: 'Orbitron';
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section-title-ar {
+  font-family: 'Cairo';
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 48px);
+  background: linear-gradient(135deg, #fff, var(--neon-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.section-title-en {
+  font-family: 'Orbitron';
+  font-size: clamp(12px, 1.5vw, 16px);
+  color: var(--neon-purple);
+  letter-spacing: 3px;
+}
+
+.section-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+  margin: 16px auto;
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(0,245,255,0.5);
+}
+
+/* ===== FILTER BAR ===== */
+.filter-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.search-bar {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+.search-bar input {
+  width: 100%;
+  background: rgba(0,245,255,0.05);
+  border: 1px solid rgba(0,245,255,0.2);
+  border-radius: 50px;
+  padding: 12px 48px 12px 20px;
+  color: var(--text-primary);
+  font-family: 'Cairo';
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s;
+  direction: rtl;
+}
+
+.search-bar input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0,245,255,0.15);
+}
+
+.search-bar input::placeholder { color: var(--text-secondary); }
+
+.search-bar i {
+  position: absolute;
+  left: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.filter-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  padding: 8px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Cairo';
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(180,79,255,0.15));
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0,245,255,0.15);
+}
+
+/* ===== COURSES GRID ===== */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.course-card {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: default;
+  backdrop-filter: blur(20px);
+  animation: fadeSlideUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.course-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; height: 3px;
+  border-radius: 20px 20px 0 0;
+  transition: opacity 0.3s;
+  opacity: 0.7;
+}
+
+.course-card[data-cat="secondary"]::before { background: linear-gradient(90deg, var(--neon-cyan), #00a8cc); }
+.course-card[data-cat="gulf"]::before { background: linear-gradient(90deg, var(--neon-gold), #ff9500); }
+.course-card[data-cat="international"]::before { background: linear-gradient(90deg, var(--neon-purple), #ff006e); }
+.course-card[data-cat="tech"]::before { background: linear-gradient(90deg, #00ff88, var(--neon-cyan)); }
+
+.course-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0,245,255,0.4);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0,245,255,0.1);
+}
+
+.course-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0,245,255,0.05), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.course-card:hover::after { opacity: 1; }
+
+.card-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.course-card[data-cat="secondary"] .card-icon { background: rgba(0,245,255,0.1); box-shadow: 0 0 20px rgba(0,245,255,0.2); }
+.course-card[data-cat="gulf"] .card-icon { background: rgba(255,215,0,0.1); box-shadow: 0 0 20px rgba(255,215,0,0.2); }
+.course-card[data-cat="international"] .card-icon { background: rgba(180,79,255,0.1); box-shadow: 0 0 20px rgba(180,79,255,0.2); }
+.course-card[data-cat="tech"] .card-icon { background: rgba(0,255,136,0.1); box-shadow: 0 0 20px rgba(0,255,136,0.2); }
+
+.card-cat-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-family: 'Cairo';
+}
+
+.course-card[data-cat="secondary"] .card-cat-badge { background: rgba(0,245,255,0.1); color: var(--neon-cyan); border: 1px solid rgba(0,245,255,0.3); }
+.course-card[data-cat="gulf"] .card-cat-badge { background: rgba(255,215,0,0.1); color: var(--neon-gold); border: 1px solid rgba(255,215,0,0.3); }
+.course-card[data-cat="international"] .card-cat-badge { background: rgba(180,79,255,0.1); color: var(--neon-purple); border: 1px solid rgba(180,79,255,0.3); }
+.course-card[data-cat="tech"] .card-cat-badge { background: rgba(0,255,136,0.1); color: #00ff88; border: 1px solid rgba(0,255,136,0.3); }
+
+.card-title-ar {
+  font-family: 'Cairo';
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.card-title-en {
+  font-family: 'Poppins';
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.card-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text-secondary);
+}
+
+.card-level i { font-size: 10px; }
+
+.level-beginner { color: #00ff88; }
+.level-intermediate { color: var(--neon-gold); }
+.level-advanced { color: var(--neon-pink); }
+
+.btn-whatsapp {
+  width: 100%;
+  background: linear-gradient(135deg, #128c7e, #25d366);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-family: 'Cairo';
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.2);
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+}
+
+.btn-whatsapp i { font-size: 18px; }
+
+/* ===== FLOATING WHATSAPP ===== */
+.floating-wa {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 9999;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #128c7e, #25d366);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 28px;
+  box-shadow: 0 4px 30px rgba(37,211,102,0.5);
+  cursor: pointer;
+  text-decoration: none;
+  animation: pulseWA 2s ease-in-out infinite;
+  transition: transform 0.3s;
+}
+
+.floating-wa:hover { transform: scale(1.1); }
+.floating-wa-label {
+  position: absolute;
+  right: 70px; top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: 'Cairo';
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.floating-wa:hover .floating-wa-label { opacity: 1; }
+
+@keyframes pulseWA {
+  0%,100% { box-shadow: 0 4px 30px rgba(37,211,102,0.5), 0 0 0 0 rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 4px 30px rgba(37,211,102,0.5), 0 0 0 15px rgba(37,211,102,0); }
+}
+
+/* ===== ABOUT SECTION ===== */
+#about {
+  background: linear-gradient(180deg, transparent, rgba(0,245,255,0.02), transparent);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-img-card {
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(180,79,255,0.1));
+  border: 1px solid rgba(0,245,255,0.2);
+  height: 380px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-img-card::before {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,245,255,0.2), transparent);
+  top: -50px; right: -50px;
+  animation: orb 6s ease-in-out infinite;
+}
+
+@keyframes orb {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(20px,20px) scale(1.2); }
+}
+
+.about-badges {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.a-badge {
+  background: var(--card-bg);
+  border: 1px solid rgba(0,245,255,0.2);
+  border-radius: 12px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(20px);
+}
+
+.a-badge i { color: var(--neon-cyan); font-size: 16px; }
+
+.about-text h2 {
+  font-family: 'Cairo';
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 40px);
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff, var(--neon-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-text p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.skill-tag {
+  background: rgba(0,245,255,0.08);
+  border: 1px solid rgba(0,245,255,0.2);
+  color: var(--neon-cyan);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ===== EQUATION TICKER (FOOTER TOP) ===== */
+.equation-ticker {
+  background: rgba(0,245,255,0.04);
+  border-top: 1px solid rgba(0,245,255,0.1);
+  border-bottom: 1px solid rgba(0,245,255,0.1);
+  padding: 16px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.ticker-inner {
+  display: flex;
+  gap: 80px;
+  animation: ticker 20s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-eq {
+  font-family: 'Orbitron';
+  font-size: 13px;
+  color: rgba(0,245,255,0.5);
+  display: inline-block;
+}
+
+/* ===== CONTACT SECTION ===== */
+#contact {
+  background: linear-gradient(180deg, transparent, rgba(180,79,255,0.03), transparent);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-form-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 36px;
+  backdrop-filter: blur(20px);
+}
+
+.contact-form-wrap h3 {
+  font-family: 'Cairo';
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--neon-cyan);
+  margin-bottom: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-family: 'Cairo';
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s;
+  direction: rtl;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0,245,255,0.1);
+}
+
+.form-group textarea { min-height: 120px; resize: vertical; }
+
+/* .contact-info-wrap { } - Removed empty ruleset */
+
+.contact-info-wrap h3 {
+  font-family: 'Cairo';
+  font-weight: 700;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.contact-info-wrap p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-card {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+
+.contact-card:hover {
+  border-color: rgba(0,245,255,0.4);
+  transform: translateX(-4px);
+}
+
+.contact-card .cc-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.cc-wa { background: rgba(37,211,102,0.1); color: #25d366; }
+.cc-phone { background: rgba(0,245,255,0.1); color: var(--neon-cyan); }
+.cc-mail { background: rgba(180,79,255,0.1); color: var(--neon-purple); }
+
+.cc-text .cc-label { font-size: 12px; color: var(--text-secondary); }
+.cc-text .cc-val { font-size: 15px; font-weight: 700; color: #fff; }
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 2;
+  background: rgba(2,8,24,0.95);
+  border-top: 1px solid rgba(0,245,255,0.08);
+  padding: 48px 5vw 24px;
+  text-align: center;
+}
+
+.footer-logo { margin-bottom: 24px; }
+
+.footer-logo .logo-en {
+  font-family: 'Orbitron';
+  font-size: 22px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px rgba(0,245,255,0.4);
+}
+
+.footer-logo .logo-ar {
+  font-family: 'Cairo';
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--neon-cyan); }
+
+.footer-eq-ticker {
+  background: rgba(0,245,255,0.04);
+  border-radius: 12px;
+  padding: 12px 24px;
+  display: inline-block;
+  font-family: 'Orbitron';
+  font-size: 14px;
+  color: var(--neon-cyan);
+  margin-bottom: 24px;
+  min-width: 320px;
+  transition: all 0.5s;
+}
+
+.footer-copy {
+  font-size: 13px;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ===== HIDDEN CLASS ===== */
+.course-card.hidden { display: none; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { order: -1; }
+  .teacher-card { max-width: 320px; }
+  .f-tag { display: none; }
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 60px 5vw; }
+  .hero-stats { gap: 20px; }
+  .courses-grid { grid-template-columns: 1fr; }
+  .floating-wa { bottom: 20px; left: 20px; width: 52px; height: 52px; font-size: 24px; }
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 70px; left: 0; right: 0;
+  background: rgba(2,8,24,0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,245,255,0.1);
+  padding: 20px;
+  z-index: 999;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.mobile-menu a:hover { color: var(--neon-cyan); background: rgba(0,245,255,0.08); }
+
+/* Animation delays for cards */
+.course-card:nth-child(1) { animation-delay: 0.05s; }
+.course-card:nth-child(2) { animation-delay: 0.1s; }
+.course-card:nth-child(3) { animation-delay: 0.15s; }
+.course-card:nth-child(4) { animation-delay: 0.2s; }
+.course-card:nth-child(5) { animation-delay: 0.25s; }
+.course-card:nth-child(6) { animation-delay: 0.3s; }
+.course-card:nth-child(7) { animation-delay: 0.35s; }
+.course-card:nth-child(8) { animation-delay: 0.4s; }
+
+/* Glow lines */
+/* ===== EXPERIMENTS SECTION ===== */
+#experiments {
+  background: radial-gradient(circle at 100% 0%, rgba(180,79,255,0.05), transparent 40%);
+}
+
+.experiments-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.exp-card {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s;
+}
+
+.exp-card:hover { border-color: var(--neon-cyan); transform: translateY(-5px); }
+
+.exp-header { display: flex; align-items: center; gap: 12px; }
+.exp-icon { font-size: 24px; width: 40px; height: 40px; background: rgba(0,245,255,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--neon-cyan); }
+.exp-title { font-family: 'Cairo'; font-weight: 700; font-size: 18px; color: #fff; }
+
+.exp-canvas-wrap {
+  width: 100%;
+  height: 200px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+canvas.simulation-canvas { width: 100%; height: 100%; background: transparent; }
+
+.exp-controls { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+.control-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.control-item label { font-size: 11px; color: var(--text-secondary); font-family: 'Poppins', 'Cairo'; }
+.control-item input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255,255,255,0.1);
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+}
+.control-item input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px; height: 14px;
+  background: var(--neon-cyan);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.exp-value { font-family: 'Orbitron'; font-size: 12px; color: var(--neon-cyan); min-width: 40px; text-align: right; }
+
+.exp-btn-reset {
+  background: rgba(0,245,255,0.1);
+  border: 1px solid rgba(0,245,255,0.2);
+  color: var(--neon-cyan);
+  padding: 8px;
+  border-radius: 8px;
+  font-family: 'Cairo';
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.exp-btn-reset:hover { background: var(--neon-cyan); color: var(--bg-primary); }
+
+.glow-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  margin: 0;
+  opacity: 0.3;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Canvas Background -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- Floating Equations -->
+<div class="floating-equations" id="floatingEqs"></div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="logo-icon">⚛</div>
+    <div class="logo-text">
+      <div class="ar" data-ar="أ. إيمان عمر" data-en="Ms. Eman Omar">أ. إيمان عمر</div>
+      <div class="en" data-ar="منصة فيزياء" data-en="PHYSICS PLATFORM">PHYSICS PLATFORM</div>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#hero" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+    <li><a href="#courses" data-ar="الكورسات" data-en="Courses">الكورسات</a></li>
+    <li><a href="#experiments" data-ar="تجارب تفاعلية" data-en="Interactive Labs">تجارب تفاعلية</a></li>
+    <li><a href="#about" data-ar="من نحن" data-en="About Us">من نحن</a></li>
+    <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+  </ul>
+
+  <div style="display:flex;gap:10px;align-items:center;">
+    <button class="lang-toggle" onclick="toggleLang()">EN / عر</button>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="toggleMenu()" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a>
+  <a href="#courses" onclick="toggleMenu()" data-ar="📚 الكورسات" data-en="📚 Courses">📚 الكورسات</a>
+  <a href="#experiments" onclick="toggleMenu()" data-ar="🧪 تجارب تفاعلية" data-en="🧪 Interactive Labs">🧪 تجارب تفاعلية</a>
+  <a href="#about" onclick="toggleMenu()" data-ar="👩‍🏫 من نحن" data-en="👩‍🏫 About Us">👩‍🏫 من نحن</a>
+  <a href="#contact" onclick="toggleMenu()" data-ar="📞 تواصل" data-en="📞 Contact">📞 تواصل</a>
+</div>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-glass-card">
+      <div class="hero-badge" data-ar="🚀 منصة فيزياء متطورة" data-en="🚀 Advanced Physics Platform">🚀 منصة فيزياء متطورة</div>
+      <h1 class="hero-title-ar" data-ar="فيزياء مع أ. إيمان عمر" data-en="Physics with Ms. Eman Omar">فيزياء مع أ. إيمان عمر</h1>
+      <div class="hero-title-en" style="display:none">PHYSICS WITH MS. EMAN OMAR</div>
+      <p class="hero-desc" data-ar="استكشف عالم الفيزياء بطريقة مختلفة — من ميكانيكا الكم إلى النسبية، ومن الثانوية العامة إلى المناهج الدولية." data-en="Explore physics differently — from quantum mechanics to relativity, from high school to international curricula.">
+        استكشف عالم الفيزياء بطريقة مختلفة — من ميكانيكا الكم إلى النسبية، ومن الثانوية العامة إلى المناهج الدولية.
+      </p>
+      
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-num" data-count="2500">0</span><span class="stat-label" data-ar="طالب" data-en="Students">طالب</span></div>
+        <div class="stat-item"><span class="stat-num" data-count="8">0</span><span class="stat-label" data-ar="كورسات" data-en="Courses">كورسات</span></div>
+        <div class="stat-item"><span class="stat-num" data-count="98">0</span><span class="stat-label" data-ar="% رضا" data-en="% Satisfaction">% رضا</span></div>
+      </div>
+
+      <div class="hero-btns">
+        <a href="#courses" class="btn-primary" data-ar="استكشف الكورسات ⚡" data-en="Explore Courses ⚡">استكشف الكورسات ⚡</a>
+        <a href="#about" class="btn-outline" data-ar="من نحن" data-en="About Us">من نحن</a>
+      </div>
+    </div>
+    
+    <div class="hero-visual" style="display:none">
+       <!-- Visual integrated as section BG -->
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ===== EQUATION TICKER ===== -->
+<div class="equation-ticker">
+  <div class="ticker-inner" id="tickerInner">
+    <span class="ticker-eq">E = mc²</span>
+    <span class="ticker-eq">F = ma</span>
+    <span class="ticker-eq">∇·E = ρ/ε₀</span>
+    <span class="ticker-eq">Ψ = Aeⁱᵏˣᵉⁱᵒᵗ</span>
+    <span class="ticker-eq">ΔxΔp ≥ ℏ/2</span>
+    <span class="ticker-eq">S = kB ln Ω</span>
+    <span class="ticker-eq">∮ B·dl = μ₀I</span>
+    <span class="ticker-eq">Gμν = 8πG/c⁴ Tμν</span>
+    <span class="ticker-eq">E = hf</span>
+    <span class="ticker-eq">p = mv</span>
+    <span class="ticker-eq">E = mc²</span>
+    <span class="ticker-eq">F = ma</span>
+    <span class="ticker-eq">∇·E = ρ/ε₀</span>
+    <span class="ticker-eq">Ψ = Aeⁱᵏˣᵉⁱᵒᵗ</span>
+    <span class="ticker-eq">ΔxΔp ≥ ℏ/2</span>
+    <span class="ticker-eq">S = kB ln Ω</span>
+    <span class="ticker-eq">∮ B·dl = μ₀I</span>
+    <span class="ticker-eq">Gμν = 8πG/c⁴ Tμν</span>
+    <span class="ticker-eq">E = hf</span>
+    <span class="ticker-eq">p = mv</span>
+  </div>
+</div>
+
+<!-- ===== COURSES SECTION ===== -->
+<section id="courses">
+  <div class="section-header">
+    <div class="section-tag" data-ar="كورساتنا • our courses" data-en="our courses • كورساتنا">our courses • كورساتنا</div>
+    <h2 class="section-title-ar" data-ar="استكشف كورساتنا المتخصصة" data-en="Explore Our Specialized Courses">استكشف كورساتنا المتخصصة</h2>
+    <div class="section-title-en" style="display:none">EXPLORE OUR SPECIALIZED COURSES</div>
+    <div class="section-divider"></div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-wrap">
+    <div class="search-bar">
+      <input type="text" id="searchInput" data-ar="🔍 ابحث عن كورس..." data-en="🔍 Search course..." placeholder="🔍 ابحث عن كورس... | Search course..." oninput="filterCourses()">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="filter-btns">
+      <button class="filter-btn active" onclick="filterCat('all', this)" data-ar="الكل" data-en="All">الكل</button>
+      <button class="filter-btn" onclick="filterCat('secondary', this)" data-ar="ثانوي" data-en="Secondary">ثانوي</button>
+      <button class="filter-btn" onclick="filterCat('gulf', this)" data-ar="خليجي" data-en="Gulf">خليجي</button>
+      <button class="filter-btn" onclick="filterCat('international', this)" data-ar="إنترناشيونال" data-en="International">إنترناشيونال</button>
+      <button class="filter-btn" onclick="filterCat('tech', this)" data-ar="تكنولوجي" data-en="Tech">تكنولوجي</button>
+    </div>
+  </div>
+
+  <!-- Courses Grid -->
+  <div class="courses-grid" id="coursesGrid">
+
+    <!-- Card 1 -->
+    <div class="course-card" data-cat="secondary" data-name="فيزياء الثانوية العامة">
+      <div class="card-cat-badge" data-ar="ثانوية عامة" data-en="Secondary">ثانوية عامة</div>
+      <div class="card-icon">🏫</div>
+      <div class="card-title-ar" data-ar="فيزياء الثانوية العامة" data-en="General Secondary Physics">فيزياء الثانوية العامة</div>
+      <div class="card-title-en" style="display:none">General Secondary Physics</div>
+      <p class="card-desc" data-ar="منهج شامل للثانوية العامة المصرية (نظام عربي ولغات) — تغطية كاملة للمنهج مع بنوك الأسئلة والامتحانات." data-en="Comprehensive curriculum for Egyptian Secondary Schools (Arabic & Languages) — coverage with question banks and exams.">منهج شامل للثانوية العامة المصرية (نظام عربي ولغات) — تغطية كاملة للمنهج مع بنوك الأسئلة والامتحانات.</p>
+      <div class="card-level level-beginner" data-ar="مبتدئ → متقدم" data-en="Beginner → Advanced"><i class="fa fa-signal"></i> مبتدئ → متقدم</div>
+      <a class="btn-whatsapp" href="#" onclick="openWA(this, 'Beginner to Advanced'); return false;" data-ar="استفسر الآن 💬" data-en="Inquire Now 💬">
+        <i class="fab fa-whatsapp"></i> استفسر الآن 💬
+      </a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="course-card" data-cat="secondary" data-name="فيزياء اللغات والمدارس التجريبية">
+      <div class="card-cat-badge" data-ar="لغات" data-en="Languages">لغات</div>
+      <div class="card-icon">🌐</div>
+      <div class="card-title-ar" data-ar="فيزياء مدارس اللغات" data-en="Language Schools Physics">فيزياء مدارس اللغات</div>
+      <div class="card-title-en" style="display:none">Language Schools Physics</div>
+      <p class="card-desc" data-ar="كورس متخصص للمدارس اللغوية والتجريبية — شرح باللغتين العربية والإنجليزية مع تدريبات مكثفة." data-en="Specialized course for language and experimental schools — explanation in both Arabic and English with intensive training.">كورس متخصص للمدارس اللغوية والتجريبية — شرح باللغتين العربية والإنجليزية مع تدريبات مكثفة.</p>
+      <div class="card-level level-intermediate" data-ar="متوسط" data-en="Intermediate"><i class="fa fa-signal"></i> متوسط</div>
+      <a class="btn-whatsapp" href="#" onclick="openWA(this, 'Intermediate'); return false;" data-ar="استفسر الآن 💬" data-en="Inquire Now 💬">
+        <i class="fab fa-whatsapp"></i> استفسر الآن 💬
+      </a>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="course-card" data-cat="gulf" data-name="فيزياء المناهج الخليجية">
+      <div class="card-cat-badge" data-ar="خليجي" data-en="Gulf">خليجي</div>
+      <div class="card-icon">🌙</div>
+      <div class="card-title-ar" data-ar="فيزياء المناهج الخليجية" data-en="GCC Curriculum Physics">فيزياء المناهج الخليجية</div>
+      <div class="card-title-en" style="display:none">GCC Curriculum Physics</div>
+      <p class="card-desc" data-ar="يغطي مناهج السعودية، الإمارات، الكويت، قطر، البحرين وعُمان — منهج موحد مع تطبيقات مخصصة لكل دولة." data-en="Covers curricula of Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman — unified curriculum with country-specific applications.">يغطي مناهج السعودية، الإمارات، الكويت، قطر، البحرين وعُمان — منهج موحد مع تطبيقات مخصصة لكل دولة.</p>
+      <div class="card-level level-intermediate" data-ar="متوسط" data-en="Intermediate"><i class="fa fa-signal"></i> متوسط</div>
+      <a class="btn-whatsapp" href="#" onclick="openWA(this, 'Intermediate'); return false;" data-ar="استفسر الآن 💬" data-en="Inquire Now 💬">
+        <i class="fab fa-whatsapp"></i> استفسر الآن 💬
+      </a>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="course-card" data-cat="international" data-name="IGCSE Physics">
+      <div class="card-cat-badge" data-ar="IGCSE" data-en="IGCSE">IGCSE</div>
+      <div class="card-icon">🎓</div>
+      <div class="card-title-ar" data-ar="IGCSE فيزياء" data-en="IGCSE Physics — Cambridge">IGCSE فيزياء</div>
+      <div class="card-title-en" style="display:none">IGCSE Physics — Cambridge</div>
+      <p class="card-desc" data-ar="تحضير متكامل لامتحانات كامبريدج IGCSE — منهج كامل، أوراق امتحانات سابقة، واستراتيجيات الحل." data-en="Integrated preparation for Cambridge IGCSE exams — full curriculum, past papers, and solution strategies.">تحضير متكامل لامتحانات كامبريدج IGCSE — منهج كامل، أوراق امتحانات سابقة، واستراتيجيات الحل.</p>
+      <div class="card-level level-intermediate" data-ar="متوسط → متقدم" data-en="Intermediate → Advanced"><i class="fa fa-signal"></i> متوسط → متقدم</div>
+      <a class="btn-whatsapp" href="#" onclick="openWA(this, 'Intermediate to Advanced'); return false;" data-ar="استفسر الآن 💬" data-en="Inquire Now 💬">
+        <i class="fab fa-whatsapp"></i> استفسر الآن 💬
+      </a>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="course-card" data-cat="international" data-name="IB and American Diploma Physics">
+      <div class="card-cat-badge" data-ar="IB | الدبلوم الأمريكي" data-en="IB | American Diploma">IB | الدبلوم الأمريكي</div>
+      <div class="card-icon">🌍</div>
+      <div class="card-title-ar" data-ar="IB والدبلوم الأمريكي" data-en="IB & American Diploma Physics">IB والدبلوم الأمريكي</div>
+      <div class="card-title-en" style="display:none">IB & American Diploma Physics</div>
+      <p class="card-desc" data-ar="تغطية شاملة لمناهج IB وSAT Physics والدبلوم الأمريكي — تحضير مكثف للامتحانات الدولية." data-en="Comprehensive coverage of IB, SAT Physics, and American Diploma curricula — intensive preparation for international exams.">تغطية شاملة لمناهج IB وSAT Physics والدبلوم الأمريكي — تحضير مكثف للامتحانات الدولية.</p>
+      <div class="card-level level-advanced" data-ar="متقدم" data-en="Advanced"><i class="fa fa-signal"></i> متقدم</div>
+      <a class="btn-whatsapp" href="#" onclick="openWA(this, 'Advanced'); return false;" data-ar="استفسر الآن 💬" data-en="Inquire Now 💬">
+        <i class="fab fa-whatsapp"></i> استفسر الآن 💬
+      </a>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="course-card" data-cat="tech" data-name="الفيزياء التطبيقية للمشاريع التكنولوجية">
+      <div class="card-cat-badge" data-ar="تكنولوجي" data-en="Tech">تكنولوجي</div>
+      <div class="card-icon">🤖</div>
+      <div class="card-title-ar" data-ar="الفيزياء للمشاريع التكنولوجية" data-en="Physics for Tech Projects">الفيزياء للمشاريع التكنولوجية</div>
+      <div class="card-title-en" style="display:none">Physics for Tech Projects</div>
+      <p class="card-desc" data-ar="فيزياء الروبوتات، الحوسبة الكمية، الطاقة المتجددة، ومشاريع الفضاء — ربط النظرية بالتطبيق الحقيقي." data-en="Robotics physics, quantum computing, renewable energy, and space projects — bridging theory with real-world application.">فيزياء الروبوتات، الحوسبة الكمية، الطاقة المتجددة، ومشاريع الفضاء — ربط النظرية بالتطبيق الحقيقي.</p>
+      <div class="card-level level-advanced" data-ar="متقدم" data-en="Advanced"><i class="fa fa-signal"></i> متقدم</div>
+      <a class="btn-whatsapp" href="#" onclick="openWA(this, 'Advanced'); return false;" data-ar="استفسر الآن 💬" data-en="Inquire Now 💬">
+        <i class="fab fa-whatsapp"></i> استفسر الآن 💬
+      </a>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="course-card" data-cat="tech" data-name="فيزياء الكليات والهندسة">
+      <div class="card-cat-badge" data-ar="جامعي" data-en="University">جامعي</div>
+      <div class="card-icon">⚙️</div>
+      <div class="card-title-ar" data-ar="فيزياء الكليات والهندسة" data-en="University & Engineering Physics">فيزياء الكليات والهندسة</div>
+      <div class="card-title-en" style="display:none">University & Engineering Physics</div>
+      <p class="card-desc" data-ar="مراجعة أساسيات الفيزياء للطلاب الجامعيين وطلاب الكليات الهندسية — ميكانيكا، كهرباء، موجات، وأبصار." data-en="Reviewing physics basics for university and engineering students — mechanics, electricity, waves, and optics.">مراجعة أساسيات الفيزياء للطلاب الجامعيين وطلاب الكليات الهندسية — ميكانيكا، كهرباء، موجات، وأبصار.</p>
+      <div class="card-level level-advanced" data-ar="متقدم" data-en="Advanced"><i class="fa fa-signal"></i> متقدم</div>
+      <a class="btn-whatsapp" href="#" onclick="openWA(this, 'Advanced'); return false;" data-ar="استفسر الآن 💬" data-en="Inquire Now 💬">
+        <i class="fab fa-whatsapp"></i> استفسر الآن 💬
+      </a>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="course-card" data-cat="international" data-name="SAT Physics">
+      <div class="card-cat-badge" data-ar="SAT" data-en="SAT">SAT</div>
+      <div class="card-icon">📐</div>
+      <div class="card-title-ar" data-ar="SAT Physics التأسيسي" data-en="SAT Physics Prep Course">SAT Physics التأسيسي</div>
+      <div class="card-title-en" style="display:none">SAT Physics Prep Course</div>
+      <p class="card-desc" data-ar="تحضير مكثف لامتحان SAT Physics — استراتيجيات الحل، اختبارات محاكاة، ومراجعة شاملة لجميع الموضوعات." data-en="Intensive preparation for SAT Physics exam — solution strategies, simulation tests, and comprehensive review of all topics.">تحضير مكثف لامتحان SAT Physics — استراتيجيات الحل، اختبارات محاكاة، ومراجعة شاملة لجميع الموضوعات.</p>
+      <div class="card-level level-advanced" data-ar="متقدم" data-en="Advanced"><i class="fa fa-signal"></i> متقدم</div>
+      <a class="btn-whatsapp" href="#" onclick="openWA(this, 'Advanced'); return false;" data-ar="استفسر الآن 💬" data-en="Inquire Now 💬">
+        <i class="fab fa-whatsapp"></i> استفسر الآن 💬
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ===== EXPERIMENTS SECTION ===== -->
+<section id="experiments">
+  <div class="section-header">
+    <div class="section-tag" data-ar="مختبر الفيزياء التفاعلي" data-en="Interactive Physics Lab">Interactive Physics Lab</div>
+    <h2 class="section-title-ar" data-ar="تجارب فيزيائية حية" data-en="Live Physics Experiments">Live Physics Experiments</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="experiments-container">
+    <!-- Exp 1: Pendulum -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-icon">⏳</div>
+        <div class="exp-title" data-ar="البندول البسيط" data-en="Simple Pendulum">البندول البسيط</div>
+      </div>
+      <div class="exp-canvas-wrap">
+        <canvas id="pendulumCanvas" class="simulation-canvas"></canvas>
+      </div>
+      <div class="exp-controls">
+        <div class="control-item">
+          <label data-ar="الطول (L)" data-en="Length (L)">الطول (L)</label>
+          <input type="range" id="pendulumLength" min="50" max="150" value="100">
+          <span class="exp-value" id="valLen">100</span>
+        </div>
+        <div class="control-item">
+          <label data-ar="الجاذبية (g)" data-en="Gravity (g)">الجاذبية (g)</label>
+          <input type="range" id="pendulumGravity" min="1" max="20" value="9.8" step="0.1">
+          <span class="exp-value" id="valGrav">9.8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exp 2: Projectile -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-icon">🏹</div>
+        <div class="exp-title" data-ar="حركة المقذوفات" data-en="Projectile Motion">حركة المقذوفات</div>
+      </div>
+      <div class="exp-canvas-wrap">
+        <canvas id="projectileCanvas" class="simulation-canvas"></canvas>
+      </div>
+      <div class="exp-controls">
+        <div class="control-item">
+          <label data-ar="السرعة (v)" data-en="Velocity (v)">السرعة (v)</label>
+          <input type="range" id="projVel" min="10" max="80" value="50">
+          <span class="exp-value" id="valVel">50</span>
+        </div>
+        <div class="control-item">
+          <label data-ar="الزاوية (θ)" data-en="Angle (θ)">الزاوية (θ)</label>
+          <input type="range" id="projAngle" min="0" max="90" value="45">
+          <span class="exp-value" id="valAng">45°</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exp 3: Ohm's Law -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-icon">💡</div>
+        <div class="exp-title" data-ar="قانون أوم" data-en="Ohm's Law">قانون أوم</div>
+      </div>
+      <div class="exp-canvas-wrap">
+        <canvas id="ohmCanvas" class="simulation-canvas"></canvas>
+      </div>
+      <div class="exp-controls">
+        <div class="control-item">
+          <label data-ar="الجهد (V)" data-en="Voltage (V)">الجهد (V)</label>
+          <input type="range" id="ohmVolt" min="0" max="15" value="9" step="0.5">
+          <span class="exp-value" id="valVolt">9V</span>
+        </div>
+        <div class="control-item">
+          <label data-ar="المقاومة (R)" data-en="Resistance (R)">المقاومة (R)</label>
+          <input type="range" id="ohmRes" min="1" max="100" value="50">
+          <span class="exp-value" id="valRes">50Ω</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exp 4: Optics -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-icon">🌈</div>
+        <div class="exp-title" data-ar="انعكاس الضوء" data-en="Light Reflection">انعكاس الضوء</div>
+      </div>
+      <div class="exp-canvas-wrap">
+        <canvas id="opticsCanvas" class="simulation-canvas"></canvas>
+      </div>
+      <div class="exp-controls">
+        <div class="control-item">
+          <label data-ar="زاوية السقوط" data-en="Incident Angle">زاوية السقوط</label>
+          <input type="range" id="incidentAngle" min="0" max="90" value="45">
+          <span class="exp-value" id="valInc">45°</span>
+        </div>
+        <button class="exp-btn-reset" onclick="resetOptics()" data-ar="إعادة ضبط" data-en="Reset Optics">إعادة ضبط</button>
+      </div>
+    </div>
+
+    <!-- Exp 5: Hooke's Law -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-icon">➰</div>
+        <div class="exp-title" data-ar="قانون هوك" data-en="Hooke's Law">قانون هوك</div>
+      </div>
+      <div class="exp-canvas-wrap">
+        <canvas id="hookeCanvas" class="simulation-canvas"></canvas>
+      </div>
+      <div class="exp-controls">
+        <div class="control-item">
+          <label data-ar="ثابت الزنبرك (k)" data-en="Spring Constant (k)">Spring Constant (k)</label>
+          <input type="range" id="springK" min="0.1" max="1" value="0.5" step="0.05">
+          <span class="exp-value" id="valK">0.5</span>
+        </div>
+        <div class="control-item">
+          <label data-ar="الكتلة (m)" data-en="Mass (m)">Mass (m)</label>
+          <input type="range" id="springM" min="10" max="100" value="50">
+          <span class="exp-value" id="valM">50</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exp 6: Waves -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-icon">🌊</div>
+        <div class="exp-title" data-ar="تراكب الموجات" data-en="Wave Superposition">تراكب الموجات</div>
+      </div>
+      <div class="exp-canvas-wrap">
+        <canvas id="waveCanvas" class="simulation-canvas"></canvas>
+      </div>
+      <div class="exp-controls">
+        <div class="control-item">
+          <label data-ar="التردد (f)" data-en="Frequency (f)">Frequency (f)</label>
+          <input type="range" id="waveF" min="0.01" max="0.1" value="0.05" step="0.01">
+          <span class="exp-value" id="valF">0.05</span>
+        </div>
+        <div class="control-item">
+          <label data-ar="السعة (A)" data-en="Amplitude (A)">Amplitude (A)</label>
+          <input type="range" id="waveA" min="5" max="50" value="25">
+          <span class="exp-value" id="valAmp">25</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exp 7: RC Circuit -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-icon">⚡</div>
+        <div class="exp-title" data-ar="دائرة RC" data-en="RC Circuit">دائرة RC</div>
+      </div>
+      <div class="exp-canvas-wrap">
+        <canvas id="rcCanvas" class="simulation-canvas"></canvas>
+      </div>
+      <div class="exp-controls">
+        <div class="control-item">
+          <label data-ar="سعة المكثف (C)" data-en="Capacitance (C)">Capacitance (C)</label>
+          <input type="range" id="capC" min="10" max="200" value="100">
+          <span class="exp-value" id="valC">100μF</span>
+        </div>
+        <button class="exp-btn-reset" onclick="toggleRCCharge()" id="rcBtn" data-ar="تفريغ" data-en="Discharge">Discharge</button>
+      </div>
+    </div>
+
+    <!-- Exp 8: Newton's 2nd Law -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-icon">🏎️</div>
+        <div class="exp-title" data-ar="قانون نيوتن الثاني" data-en="Newton's 2nd Law">قانون نيوتن الثاني</div>
+      </div>
+      <div class="exp-canvas-wrap">
+        <canvas id="newtonCanvas" class="simulation-canvas"></canvas>
+      </div>
+      <div class="exp-controls">
+        <div class="control-item">
+          <label data-ar="القوة (F)" data-en="Force (F)">Force (F)</label>
+          <input type="range" id="newtonF" min="1" max="100" value="50">
+          <span class="exp-value" id="valNewF">50N</span>
+        </div>
+        <div class="control-item">
+          <label data-ar="الكتلة (m)" data-en="Mass (m)">Mass (m)</label>
+          <input type="range" id="newtonM" min="1" max="50" value="10">
+          <span class="exp-value" id="valNewM">10kg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">about us • من نحن</div>
+    <h2 class="section-title-ar">أ. إيمان عمر</h2>
+    <div class="section-title-en">MS. EMAN OMAR — PHYSICS EDUCATOR</div>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-img-card premium-hero-card" style="aspect-ratio: 1; display:flex; align-items:center; justify-content:center;">
+        <img src="logo-sharing.png" alt="Branding" style="width: 80%; filter: drop-shadow(0 0 30px var(--neon-purple));">
+      </div>
+    </div>
+    <div class="about-grid-box">
+      <div class="about-text">
+        <h2 data-ar="أ. إيمان عمر" data-en="Ms. Eman Omar">Ms. Eman Omar</h2>
+        <p data-ar="أستاذة فيزياء متخصصة بخبرة تزيد عن 10 سنوات في تدريس الفيزياء لمختلف المناهج الدولية والوطنية." data-en="Specialized physics educator with 10+ years experience teaching international and national physics curricula.">Specialized physics educator with 10+ years experience teaching international and national physics curricula.</p>
+        <div class="skills-list">
+          <span class="skill-tag" data-ar="⚛ ميكانيكا الكم" data-en="⚛ Quantum Mechanics">⚛ Quantum Mechanics</span>
+          <span class="skill-tag" data-ar="🌀 النسبية" data-en="🌀 Relativity">🌀 Relativity</span>
+          <span class="skill-tag" data-ar="🤖 ذكاء اصطناعي" data-en="🤖 AI Physics">🤖 AI Physics</span>
+          <span class="skill-tag" data-ar="🔭 فلك" data-en="🔭 Astrophysics">🔭 Astrophysics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">contact us • تواصل معنا</div>
+    <h2 class="section-title-ar">تواصل معنا</h2>
+    <div class="section-title-en">GET IN TOUCH</div>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-form-wrap">
+      <h3>📩 أرسل رسالتك | Send a Message</h3>
+      <div class="form-group">
+        <label data-ar="الاسم" data-en="Name">الاسم</label>
+        <input type="text" id="cName" data-ar="اسمك الكريم..." data-en="Your full name..." placeholder="اسمك الكريم...">
+      </div>
+      <div class="form-group">
+        <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+        <input type="email" id="cEmail" data-ar="بريدك الإلكتروني..." data-en="Your email address..." placeholder="email@example.com" dir="ltr">
+      </div>
+      <div class="form-group">
+        <label data-ar="رسالتك" data-en="Message">رسالتك</label>
+        <textarea id="cMsg" data-ar="اكتب رسالتك هنا..." data-en="Type your message here..." placeholder="اكتب رسالتك هنا..."></textarea>
+      </div>
+      <a class="btn-whatsapp" href="#" onclick="sendContactWA(); return false;" style="text-decoration:none" data-ar="إرسال عبر واتساب 📲" data-en="Send via WhatsApp 📲">
+        <i class="fab fa-whatsapp"></i> إرسال عبر واتساب 📲
+      </a>
+    </div>
+
+    <div class="contact-info-wrap">
+      <h3>معلومات التواصل | Contact Info</h3>
+      <p>لا تتردد في التواصل معنا لأي استفسار حول الكورسات، الجداول، أو أي معلومات إضافية تحتاجها.</p>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="cc-icon cc-wa"><i class="fab fa-whatsapp"></i></div>
+          <div class="cc-text">
+            <div class="cc-label" data-ar="واتساب" data-en="WhatsApp">واتساب</div>
+            <div class="cc-val">+20 120 290 6502</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon cc-phone"><i class="fa fa-phone"></i></div>
+          <div class="cc-text">
+            <div class="cc-label" data-ar="هاتف" data-en="Phone">هاتف</div>
+            <div class="cc-val">+20 120 290 6502</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon cc-mail"><i class="fa fa-envelope"></i></div>
+          <div class="cc-text">
+            <div class="cc-label">بريد | Email</div>
+            <div class="cc-val">physics@emanomar.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-en">PHYSICS WITH MS. EMAN OMAR</div>
+    <div class="logo-ar">منصة فيزياء أ. إيمان عمر</div>
+  </div>
+
+  <div class="footer-links">
+    <a href="#hero" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+    <a href="#courses" data-ar="الكورسات" data-en="Courses">الكورسات</a>
+    <a href="#experiments" data-ar="تجارب" data-en="Labs">تجارب</a>
+    <a href="#about" data-ar="من نحن" data-en="About">من نحن</a>
+    <a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a>
+  </div>
+
+  <div>
+    <div class="footer-eq-ticker" id="footerEq">E = mc²</div>
+  </div>
+
+  <div class="footer-copy" data-ar="© 2026 منصة فيزياء أ. إيمان عمر — جميع الحقوق محفوظة" data-en="© 2026 Ms. Eman Omar Physics Platform — All Rights Reserved">
+    © 2026 Ms. Eman Omar Physics Platform — جميع الحقوق محفوظة
+  </div>
+</footer>
+
+<a class="floating-wa" href="#" onclick="openGeneralWA(); return false;" title="Contact us via WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+  <span class="floating-wa-label" data-ar="استفسار عام" data-en="General Inquiry">General Inquiry</span>
+</a>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+/* ============================================
+   CONFIGURATION — Edit these values easily
+   ============================================ */
+const WHATSAPP_NUMBER = "201202906502"; // ← Verified number with international code
+
+/* Messages per course */
+const COURSE_MESSAGES = {
+  ar: (name, level) =>
+    `مرحباً أ. إيمان، أود الاستفسار عن كورس "${name}"${level ? ' (المستوى: ' + level + ')' : ''}. الرجاء إرسال التفاصيل والجدول.`,
+  en: (name, level) =>
+    `Hello Ms. Eman, I would like to inquire about the course "${name}"${level ? ' (Level: ' + level + ')' : ''}. Please send me the details and schedule.`
+};
+
+function openWA(btn, level = '') {
+  const card = btn.closest('.course-card');
+  const titleEl = card.querySelector('[data-ar]');
+  const courseName = isAr ? titleEl.getAttribute('data-ar') : titleEl.getAttribute('data-en');
+  const lang = isAr ? 'ar' : 'en';
+  const msg = COURSE_MESSAGES[lang](courseName, level);
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+function openGeneralWA() {
+  const msg = "مرحباً، لدي استفسار عام حول منصة فيزياء أ. إيمان عمر. الرجاء التواصل معي.";
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function sendContactWA() {
+  const name = document.getElementById('cName').value || 'زائر';
+  const email = document.getElementById('cEmail').value || '';
+  const msg = document.getElementById('cMsg').value || '';
+  const text = `مرحباً أ. إيمان 👋\nالاسم: ${name}\nالبريد: ${email}\nالرسالة: ${msg}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+/* ============================================
+   NAVBAR SCROLL EFFECT
+   ============================================ */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ============================================
+   MOBILE MENU
+   ============================================ */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+/* ============================================
+   LANGUAGE TOGGLE (simple demo)
+   ============================================ */
+let isAr = false; // Set English as default
+
+function updateLanguageContent() {
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    const text = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+       el.setAttribute('placeholder', text);
+    } else {
+       el.innerText = text;
+    }
+  });
+
+  // Handle section titles with display:none hacks or dual titles
+  document.querySelectorAll('.hero-title-ar, .section-title-ar').forEach(el => {
+    // If we have a sibling with -en class, handle them
+    const enSibling = el.parentElement.querySelector('.hero-title-en, .section-title-en');
+    if (enSibling) {
+      if (isAr) {
+        el.style.display = 'block';
+        enSibling.style.display = 'none';
+      } else {
+        el.style.display = 'none';
+        enSibling.style.display = 'block';
+      }
+    }
+  });
+
+  // Toggle button text
+  const langBtn = document.querySelector('.lang-toggle');
+  if (langBtn) langBtn.innerText = isAr ? "English" : "عربي";
+}
+
+function toggleLang() {
+  isAr = !isAr;
+  document.documentElement.setAttribute('lang', isAr ? 'ar' : 'en');
+  document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+  updateLanguageContent();
+}
+
+// Initial call to set English content correctly
+document.addEventListener('DOMContentLoaded', () => {
+    updateLanguageContent();
+});
+
+/* ============================================
+   COURSE FILTER
+   ============================================ */
+let currentCat = 'all';
+
+function filterCat(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCourses();
+}
+
+function filterCourses() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.course-card').forEach(card => {
+    const catMatch = currentCat === 'all' || card.dataset.cat === currentCat;
+    const nameMatch = !query || card.dataset.name.toLowerCase().includes(query) || card.textContent.toLowerCase().includes(query);
+    card.classList.toggle('hidden', !(catMatch && nameMatch));
+  });
+}
+
+/* ============================================
+   COUNTER ANIMATION
+   ============================================ */
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { el.textContent = target + (target === 98 ? '%' : '+'); clearInterval(timer); }
+      else el.textContent = Math.floor(current) + (target === 98 ? '%' : '+');
+    }, 25);
+  });
+}
+
+// Trigger counter when hero is visible
+const heroObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { animateCounters(); heroObs.disconnect(); }
+}, { threshold: 0.5 });
+heroObs.observe(document.getElementById('hero'));
+
+/* ============================================
+   FOOTER EQUATION TICKER
+   ============================================ */
+const equations = [
+  "E = mc²", "F = ma", "ΔxΔp ≥ ℏ/2", "∇·E = ρ/ε₀",
+  "Ψ = Aeⁱᵏˣᵉⁱᵒᵗ", "S = kB ln Ω", "∮ B·dl = μ₀I",
+  "Gμν = 8πG/c⁴ Tμν", "E = hf", "v = fλ",
+  "PV = nRT", "F = qvB", "τ = Iα"
+];
+
+let eqIdx = 0;
+function rotateEq() {
+  const el = document.getElementById('footerEq');
+  el.style.opacity = '0';
+  setTimeout(() => {
+    eqIdx = (eqIdx + 1) % equations.length;
+    el.textContent = equations[eqIdx];
+    el.style.opacity = '1';
+  }, 400);
+}
+setInterval(rotateEq, 3000);
+
+/* ============================================
+   CANVAS PARTICLE BACKGROUND
+   ============================================ */
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], mouse = { x: -1000, y: -1000 };
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.r = Math.random() * 1.5 + 0.5;
+      this.alpha = Math.random() * 0.5 + 0.1;
+      this.color = Math.random() > 0.5 ? '0,245,255' : '180,79,255';
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // mouse repulsion
+      const dx = this.x - mouse.x, dy = this.y - mouse.y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 100) {
+        this.x += dx / d * 2;
+        this.y += dy / d * 2;
+      }
+
+      if (this.x < 0 || this.x > W) this.vx *= -1;
+      if (this.y < 0 || this.y > H) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+  function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0,245,255,${(1 - d/120) * 0.12})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawConnections();
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ============================================
+   FLOATING EQUATIONS BACKGROUND
+   ============================================ */
+(function() {
+  const eqs = [
+    "E=mc²", "F=ma", "ΔE·Δt≥ℏ", "∇²Ψ=0",
+    "PV=nRT", "F=qE", "v=fλ", "S=kln Ω",
+    "τ=rF", "L=Iω", "p=mv", "∮E·dA"
+  ];
+  const container = document.getElementById('floatingEqs');
+  for (let i = 0; i < 12; i++) {
+    const el = document.createElement('div');
+    el.className = 'eq';
+    el.textContent = eqs[i % eqs.length];
+    el.style.left = (Math.random() * 95) + '%';
+    el.style.animationDuration = (15 + Math.random() * 20) + 's';
+    el.style.animationDelay = -(Math.random() * 30) + 's';
+    el.style.fontSize = (10 + Math.random() * 8) + 'px';
+    container.appendChild(el);
+  }
+})();
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.animationPlayState = 'running';
+    }
+  });
+}, { threshold: 0.1 });
+
+/* ============================================
+   INTERACTIVE EXPERIMENTS LOGIC
+   ============================================ */
+
+// 1. PENDULUM
+function initPendulum() {
+  const canvas = document.getElementById('pendulumCanvas');
+  const ctx = canvas.getContext('2d');
+  const lenInput = document.getElementById('pendulumLength');
+  const gravInput = document.getElementById('pendulumGravity');
+  const valLen = document.getElementById('valLen');
+  const valGrav = document.getElementById('valGrav');
+
+  let angle = Math.PI / 4;
+  let angleV = 0;
+  let angleA = 0;
+  let origin = { x: 0, y: 30 };
+
+  function draw() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    origin.x = canvas.width / 2;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let l = parseInt(lenInput.value);
+    let g = parseFloat(gravInput.value);
+    valLen.innerText = l;
+    valGrav.innerText = g;
+
+    // Physics
+    angleA = (-1 * g / l) * Math.sin(angle);
+    angleV += angleA;
+    angleV *= 0.995; // damping
+    angle += angleV;
+
+    let x = l * Math.sin(angle) + origin.x;
+    let y = l * Math.cos(angle) + origin.y;
+
+    // Draw
+    ctx.strokeStyle = 'rgba(0,245,255,0.5)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+
+    ctx.fillStyle = 'var(--neon-cyan)';
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = 'var(--neon-cyan)';
+    ctx.beginPath();
+    ctx.arc(x, y, 15, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// 2. PROJECTILE
+function initProjectile() {
+  const canvas = document.getElementById('projectileCanvas');
+  const ctx = canvas.getContext('2d');
+  const velInput = document.getElementById('projVel');
+  const angInput = document.getElementById('projAngle');
+  const valVel = document.getElementById('valVel');
+  const valAng = document.getElementById('valAng');
+
+  let particles = [];
+
+  function draw() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let v = parseInt(velInput.value);
+    let a = parseInt(angInput.value);
+    valVel.innerText = v;
+    valAng.innerText = a + '°';
+
+    // Cannon
+    ctx.save();
+    ctx.translate(20, canvas.height - 20);
+    ctx.rotate(-a * Math.PI / 180);
+    ctx.fillStyle = 'rgba(180,79,255,0.5)';
+    ctx.fillRect(0, -10, 40, 20);
+    ctx.restore();
+
+    // Fire auto particles
+    if (Math.random() < 0.1) {
+      let rad = -a * Math.PI / 180;
+      particles.push({
+        x: 20, y: canvas.height - 20,
+        vx: Math.cos(rad) * v / 5,
+        vy: Math.sin(rad) * v / 5,
+        life: 100
+      });
+    }
+
+    particles.forEach((p, i) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.2; // gravity
+      p.life--;
+
+      ctx.fillStyle = `rgba(180,79,255,${p.life/100})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI*2);
+      ctx.fill();
+
+      if (p.life <= 0 || p.y > canvas.height) particles.splice(i, 1);
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// 3. OHM'S LAW
+function initOhm() {
+  const canvas = document.getElementById('ohmCanvas');
+  const ctx = canvas.getContext('2d');
+  const voltInput = document.getElementById('ohmVolt');
+  const resInput = document.getElementById('ohmRes');
+  const valVolt = document.getElementById('valVolt');
+  const valRes = document.getElementById('valRes');
+
+  function draw() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let V = parseFloat(voltInput.value);
+    let R = parseInt(resInput.value);
+    let I = V / R;
+    valVolt.innerText = V + 'V';
+    valRes.innerText = R + 'Ω';
+
+    let centerX = canvas.width / 2;
+    let centerY = canvas.height / 2;
+
+    // Draw Glow (Bulb)
+    let glowSize = I * 1000;
+    let gradient = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, 20 + glowSize);
+    gradient.addColorStop(0, `rgba(255, 215, 0, ${Math.min(I*20, 1)})`);
+    gradient.addColorStop(1, 'transparent');
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 30 + glowSize, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Bulb shape
+    ctx.strokeStyle = '#ffd700';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 20, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Text current
+    ctx.fillStyle = '#fff';
+    ctx.font = '12px Orbitron';
+    ctx.textAlign = 'center';
+    ctx.fillText(`Current I = ${I.toFixed(3)} A`, centerX, centerY + 50);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// 4. OPTICS
+function initOptics() {
+  const canvas = document.getElementById('opticsCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const incInput = document.getElementById('incidentAngle');
+  const valInc = document.getElementById('valInc');
+
+  function draw() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let angle = parseInt(incInput.value);
+    valInc.innerText = angle + '°';
+
+    let centerX = canvas.width / 2;
+    let centerY = canvas.height - 40;
+
+    // Mirror
+    ctx.strokeStyle = '#8baac8';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(20, centerY);
+    ctx.lineTo(canvas.width - 20, centerY);
+    ctx.stroke();
+
+    // Normal line
+    ctx.setLineDash([5, 5]);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX, 20);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Incident Ray
+    let rad = (90 - angle) * Math.PI / 180;
+    let rayLen = 150;
+    ctx.strokeStyle = '#00f5ff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(centerX - Math.cos(rad) * rayLen, centerY - Math.sin(rad) * rayLen);
+    ctx.lineTo(centerX, centerY);
+    ctx.stroke();
+
+    // Reflected Ray
+    ctx.strokeStyle = '#ff006e';
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX + Math.cos(rad) * rayLen, centerY - Math.sin(rad) * rayLen);
+    ctx.stroke();
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+function resetOptics() {
+  document.getElementById('incidentAngle').value = 45;
+}
+
+// 5. HOOKE'S LAW
+function initHooke() {
+  const canvas = document.getElementById('hookeCanvas');
+  const ctx = canvas.getContext('2d');
+  const kIn = document.getElementById('springK');
+  const mIn = document.getElementById('springM');
+  const valK = document.getElementById('valK');
+  const valM = document.getElementById('valM');
+
+  let y = 0, vy = 0;
+  function draw() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let k = parseFloat(kIn.value), m = parseInt(mIn.value);
+    valK.innerText = k; valM.innerText = m;
+
+    let ay = -k * y / (m/10);
+    vy += ay; vy *= 0.99; y += vy;
+
+    let cx = canvas.width/2, cy = 20, eq = 80 + y;
+    ctx.strokeStyle = '#00f5ff'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx, cy);
+    for(let i=0; i<=20; i++) ctx.lineTo(cx + (i%2?10:-10), cy + (eq/20)*i);
+    ctx.stroke();
+
+    ctx.fillStyle = '#b44fff'; ctx.fillRect(cx-15, cy+eq, 30, 20);
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// 6. WAVE SUPERPOSITION
+function initWave() {
+  const canvas = document.getElementById('waveCanvas');
+  const ctx = canvas.getContext('2d');
+  const fIn = document.getElementById('waveF'), aIn = document.getElementById('waveA');
+  const valF = document.getElementById('valF'), valA = document.getElementById('valAmp');
+
+  let t = 0;
+  function draw() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let f = parseFloat(fIn.value), A = parseInt(aIn.value);
+    valF.innerText = f; valA.innerText = A;
+    t += f;
+
+    ctx.lineWidth = 2;
+    // Wave 1
+    ctx.strokeStyle = 'rgba(0, 245, 255, 0.3)';
+    ctx.beginPath();
+    for(let x=0; x<canvas.width; x++) ctx.lineTo(x, canvas.height/2 + Math.sin(x*0.05 + t)*A);
+    ctx.stroke();
+
+    // Wave 2
+    ctx.strokeStyle = 'rgba(180, 79, 255, 0.3)';
+    ctx.beginPath();
+    for(let x=0; x<canvas.width; x++) ctx.lineTo(x, canvas.height/2 + Math.sin(x*0.03 - t*1.5)*A*0.7);
+    ctx.stroke();
+
+    // Sum
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 3;
+    ctx.beginPath();
+    for(let x=0; x<canvas.width; x++) {
+      let y1 = Math.sin(x*0.05 + t)*A;
+      let y2 = Math.sin(x*0.03 - t*1.5)*A*0.7;
+      ctx.lineTo(x, canvas.height/2 + y1 + y2);
+    }
+    ctx.stroke();
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// 7. RC CIRCUIT
+let isCharging = true;
+function toggleRCCharge() {
+  isCharging = !isCharging;
+  document.getElementById('rcBtn').innerText = isCharging ? (isAr ? 'تفريغ' : 'Discharge') : (isAr ? 'شحن' : 'Charge');
+  document.getElementById('rcBtn').setAttribute('data-ar', isCharging ? 'تفريغ' : 'شحن');
+  document.getElementById('rcBtn').setAttribute('data-en', isCharging ? 'Discharge' : 'Charge');
+}
+
+function initRC() {
+  const canvas = document.getElementById('rcCanvas');
+  const ctx = canvas.getContext('2d');
+  const cIn = document.getElementById('capC'), valC = document.getElementById('valC');
+  let voltage = 0;
+
+  function draw() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let C = parseInt(cIn.value); valC.innerText = C + 'μF';
+    let target = isCharging ? 100 : 0;
+    voltage += (target - voltage) / (C / 5);
+
+    ctx.fillStyle = `rgba(0, 245, 255, ${voltage/100})`;
+    ctx.fillRect(canvas.width/2-30, canvas.height-20 - (voltage*1.5), 60, voltage*1.5);
+
+    ctx.strokeStyle = '#fff'; ctx.strokeRect(canvas.width/2-30, canvas.height-20-150, 60, 150);
+    ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+    ctx.fillText(`Charge: ${voltage.toFixed(1)}%`, canvas.width/2, 40);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// 8. NEWTON'S 2ND LAW
+function initNewton() {
+  const canvas = document.getElementById('newtonCanvas');
+  const ctx = canvas.getContext('2d');
+  const fIn = document.getElementById('newtonF'), mIn = document.getElementById('newtonM');
+  const valF = document.getElementById('valNewF'), valM = document.getElementById('valNewM');
+
+  let px = 20, vx = 0;
+  function draw() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let F = parseInt(fIn.value), M = parseInt(mIn.value);
+    valF.innerText = F + 'N'; valM.innerText = M + 'kg';
+
+    let ax = F / (M * 5); vx += ax; px += vx;
+    if(px > canvas.width - 20) { px = 20; vx = 0; }
+
+    ctx.fillStyle = '#ff006e'; ctx.fillRect(px, canvas.height/2-10, 20, 20);
+    ctx.strokeStyle = '#fff'; ctx.beginPath(); ctx.moveTo(px, canvas.height/2); ctx.lineTo(px - F, canvas.height/2); ctx.stroke();
+    ctx.fillText('F', px - F - 10, canvas.height/2);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// Initialize all
+window.addEventListener('load', () => {
+  initPendulum();
+  initProjectile();
+  initOhm();
+  initOptics();
+  initHooke();
+  initWave();
+  initRC();
+  initNewton();
+});
+
+document.querySelectorAll('.course-card, .about-grid, .contact-grid, .exp-card').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  revealObs.observe(el);
+});
+</script>
+
+</body>
+</html>
