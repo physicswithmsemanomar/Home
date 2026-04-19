@@ -41,6 +41,7 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
   direction: ltr; /* Changed to ltr as default */
+  padding-top: 70px; /* Space for fixed navbar */
 }
 
 /* ===== CANVAS BACKGROUND ===== */
@@ -76,6 +77,12 @@ body {
   10% { opacity: 1; }
   90% { opacity: 0.6; }
   100% { transform: translateY(-10vh) rotate(10deg); opacity: 0; }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: relative;
+  z-index: 1000;
 }
 
 /* ===== NAVBAR ===== */
@@ -1270,6 +1277,126 @@ canvas.simulation-canvas { width: 100%; height: 100%; background: transparent; }
   margin: 0;
   opacity: 0.3;
 }
+
+/* ============================================
+   MOBILE NAVIGATION MENU
+   ============================================ */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(2, 8, 24, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu a {
+  font-family: 'Cairo';
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.mobile-menu a:hover {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* ============================================
+   MEDIA QUERIES (RESPONSIVENESS)
+   ============================================ */
+
+/* Large Tablets & Small Desktops */
+@media (max-width: 1200px) {
+  .hero-content, .about-grid, .contact-grid {
+    gap: 40px;
+    padding: 0 4vw;
+  }
+}
+
+/* Tablets (Portrait) */
+@media (max-width: 991px) {
+  nav .nav-links { display: none; }
+  .hamburger { display: flex; }
+  
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 50px;
+  }
+  
+  .hero-stats { justify-content: center; }
+  .hero-btns { justify-content: center; }
+  
+  .about-grid, .contact-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .about-visual, .contact-info-wrap {
+    order: -1;
+  }
+
+  .about-img-card {
+    height: 300px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+  #hero {
+    background-position: 75% center; /* Adjust to show teacher better on narrow screens */
+    min-height: 80vh;
+  }
+  
+  .hero-glass-card {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+  
+  .hero-title-ar { font-size: 2.5rem; }
+  .about-text h2 { font-size: 2.2rem; }
+  
+  .section-header { margin-bottom: 40px; }
+  
+  .courses-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  .experiments-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Very Small Devices */
+@media (max-width: 480px) {
+  .nav-logo .logo-icon { width: 36px; height: 36px; font-size: 16px; }
+  .logo-text .ar { font-size: 12px; }
+  
+  .hero-stats { flex-direction: column; gap: 20px; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns a { width: 100%; text-align: center; }
+  
+  .contact-form-wrap { padding: 24px; }
+}
 </style>
 </head>
 
@@ -1278,43 +1405,48 @@ canvas.simulation-canvas { width: 100%; height: 100%; background: transparent; }
 <!-- Canvas Background -->
 <canvas id="bg-canvas"></canvas>
 
+<!-- ===== HEADER ===== -->
+<header id="site-header">
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <div class="logo-icon">⚛</div>
+      <div class="logo-text">
+        <div class="ar" data-ar="أ. إيمان عمر" data-en="Ms. Eman Omar">أ. إيمان عمر</div>
+        <div class="en" data-ar="منصة فيزياء" data-en="PHYSICS PLATFORM">PHYSICS PLATFORM</div>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#hero" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+      <li><a href="#courses" data-ar="الكورسات" data-en="Courses">الكورسات</a></li>
+      <li><a href="#experiments" data-ar="تجارب تفاعلية" data-en="Interactive Labs">تجارب تفاعلية</a></li>
+      <li><a href="laws_page.html" data-ar="قوانين" data-en="Formula for Senior 3">قوانين</a></li>
+      <li><a href="#about" data-ar="من نحن" data-en="About Us">من نحن</a></li>
+      <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+    </ul>
+
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="lang-toggle" onclick="toggleLang()">EN / عر</button>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#hero" onclick="toggleMenu()" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a>
+    <a href="#courses" onclick="toggleMenu()" data-ar="📚 الكورسات" data-en="📚 Courses">📚 الكورسات</a>
+    <a href="#experiments" onclick="toggleMenu()" data-ar="🧪 تجارب تفاعلية" data-en="🧪 Interactive Labs">🧪 تجارب تفاعلية</a>
+    <a href="laws_page.html" onclick="toggleMenu()" data-ar="⚡ القوانين" data-en="⚡ Formula for Senior 3">⚡ القوانين</a>
+    <a href="#about" onclick="toggleMenu()" data-ar="👩‍🏫 من نحن" data-en="👩‍🏫 About Us">👩‍🏫 من نحن</a>
+    <a href="#contact" onclick="toggleMenu()" data-ar="📞 تواصل" data-en="📞 Contact">📞 تواصل</a>
+  </div>
+</header>
+
 <!-- Floating Equations -->
 <div class="floating-equations" id="floatingEqs"></div>
-
-<!-- ===== NAVBAR ===== -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">
-    <div class="logo-icon">⚛</div>
-    <div class="logo-text">
-      <div class="ar" data-ar="أ. إيمان عمر" data-en="Ms. Eman Omar">أ. إيمان عمر</div>
-      <div class="en" data-ar="منصة فيزياء" data-en="PHYSICS PLATFORM">PHYSICS PLATFORM</div>
-    </div>
-  </a>
-
-  <ul class="nav-links">
-    <li><a href="#hero" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-    <li><a href="#courses" data-ar="الكورسات" data-en="Courses">الكورسات</a></li>
-    <li><a href="#experiments" data-ar="تجارب تفاعلية" data-en="Interactive Labs">تجارب تفاعلية</a></li>
-    <li><a href="#about" data-ar="من نحن" data-en="About Us">من نحن</a></li>
-    <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
-  </ul>
-
-  <div style="display:flex;gap:10px;align-items:center;">
-    <button class="lang-toggle" onclick="toggleLang()">EN / عر</button>
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#hero" onclick="toggleMenu()" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a>
-  <a href="#courses" onclick="toggleMenu()" data-ar="📚 الكورسات" data-en="📚 Courses">📚 الكورسات</a>
-  <a href="#experiments" onclick="toggleMenu()" data-ar="🧪 تجارب تفاعلية" data-en="🧪 Interactive Labs">🧪 تجارب تفاعلية</a>
-  <a href="#about" onclick="toggleMenu()" data-ar="👩‍🏫 من نحن" data-en="👩‍🏫 About Us">👩‍🏫 من نحن</a>
-  <a href="#contact" onclick="toggleMenu()" data-ar="📞 تواصل" data-en="📞 Contact">📞 تواصل</a>
-</div>
 
 <!-- ===== HERO SECTION ===== -->
 <section id="hero">
@@ -1854,20 +1986,6 @@ function sendContactWA() {
   const msg = document.getElementById('cMsg').value || '';
   const text = `مرحباً أ. إيمان 👋\nالاسم: ${name}\nالبريد: ${email}\nالرسالة: ${msg}`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
-}
-
-/* ============================================
-   NAVBAR SCROLL EFFECT
-   ============================================ */
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-});
-
-/* ============================================
-   MOBILE MENU
-   ============================================ */
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
 }
 
 /* ============================================
@@ -2487,6 +2605,9 @@ document.querySelectorAll('.course-card, .about-grid, .contact-grid, .exp-card')
   revealObs.observe(el);
 });
 </script>
+
+<!-- Load navbar script -->
+<script src="load-navbar.js"></script>
 
 </body>
 </html>
