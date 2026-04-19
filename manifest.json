@@ -1,0 +1,23 @@
+{
+  "name": "فيزياء أ. إيمان عمر",
+  "short_name": "فيزياء",
+  "description": "منصة قوانين الفيزياء للصف الثالث الثانوي",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#020818",
+  "theme_color": "#020818",
+  "icons": [
+    {
+      "src": "logo-sharing.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-sharing.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "lang": "ar",
+  "prefer_related_applications": false
+}

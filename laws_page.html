@@ -7,6 +7,16 @@
     <!-- Social Sharing -->
     <meta property="og:title" content="Physics Laws - Grade 3 Secondary">
     <meta property="og:description" content="Complete laws and formulas for Grade 3 secondary physics">
+    <meta property="og:image" content="logo-sharing.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="logo-sharing.png">
+    <link rel="icon" href="logo-sharing.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo-sharing.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#020818">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="فيزياء أ. إيمان عمر">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -689,13 +699,56 @@
 
         /* ===== PRINT STYLES ===== */
         @media print {
-            nav, footer, .hamburger {
-                display: none;
+            html, body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            *, *::before, *::after {
+                color: #000000 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+            nav, footer, .hamburger, .floating-wa, .floating-equations, #bg-canvas {
+                display: none !important;
+            }
+            body {
+                padding: 0 !important;
+            }
+            main, section, .law-section {
+                background: #ffffff !important;
+                color: #000000 !important;
             }
             .law-section {
                 page-break-inside: avoid;
-                box-shadow: none;
-                border: 1px solid #ccc;
+                box-shadow: none !important;
+                border: 1px solid #000000 !important;
+                padding: 20px !important;
+            }
+            .formula-box, .note-box {
+                background: #f8f8f8 !important;
+                color: #000000 !important;
+                border: 1px solid #999999 !important;
+            }
+            .table-wrapper, table, th, td {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border-color: #000000 !important;
+            }
+            table {
+                border-collapse: collapse !important;
+            }
+            th, td {
+                border: 1px solid #000000 !important;
+            }
+            a {
+                color: #000000 !important;
+                text-decoration: underline !important;
+            }
+            .section-title, .section-tag, .law-section h2, .law-section h3 {
+                color: #000000 !important;
             }
         }
     </style>
@@ -761,6 +814,7 @@
                 </p>
                 <div class="hero-header-btns">
                     <a href="#laws-content" class="btn-primary">استكشف القوانين ⚡ | Explore Laws</a>
+                    <button id="printLawsButton" class="btn-primary" type="button">طباعة القوانين كـ PDF | Print PDF</button>
                     <a href="index.html.html#courses" class="btn-outline">العودة للكورسات | Back to Courses</a>
                 </div>
             </div>
@@ -1203,6 +1257,13 @@
         }
 
         createFloatingEquations();
+
+        const printLawsButton = document.getElementById('printLawsButton');
+        if (printLawsButton) {
+            printLawsButton.addEventListener('click', () => {
+                window.print();
+            });
+        }
     </script>
 
     <!-- Load navbar script -->
