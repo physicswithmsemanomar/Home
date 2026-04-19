@@ -1,0 +1,37 @@
+<!-- ===== NAVBAR ===== -->
+<!-- This navbar appears at the very top of every page -->
+<nav id="navbar">
+    <a href="index.html.html" class="nav-logo">
+        <div class="logo-icon">⚛</div>
+        <div class="logo-text">
+            <div class="ar" data-ar="أ. إيمان عمر" data-en="Ms. Eman Omar">أ. إيمان عمر</div>
+            <div class="en" data-ar="منصة فيزياء" data-en="PHYSICS PLATFORM">PHYSICS PLATFORM</div>
+        </div>
+    </a>
+
+    <ul class="nav-links">
+        <li><a href="index.html.html#hero" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+        <li><a href="index.html.html#courses" data-ar="الكورسات" data-en="Courses">الكورسات</a></li>
+        <li><a href="index.html.html#experiments" data-ar="تجارب تفاعلية" data-en="Interactive Labs">تجارب تفاعلية</a></li>
+        <li><a href="laws_page.html" data-ar="قوانين" data-en="Formula for Senior 3">قوانين</a></li>
+        <li><a href="index.html.html#about" data-ar="من نحن" data-en="About Us">من نحن</a></li>
+        <li><a href="index.html.html#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+    </ul>
+
+    <div style="display:flex;gap:10px;align-items:center;">
+        <button class="lang-toggle" onclick="toggleLang()">EN / عر</button>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html.html#hero" onclick="toggleMenu()" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a>
+    <a href="index.html.html#courses" onclick="toggleMenu()" data-ar="📚 الكورسات" data-en="📚 Courses">📚 الكورسات</a>
+    <a href="index.html.html#experiments" onclick="toggleMenu()" data-ar="🧪 تجارب تفاعلية" data-en="🧪 Interactive Labs">🧪 تجارب تفاعلية</a>
+    <a href="laws_page.html" onclick="toggleMenu()" data-ar="⚡ القوانين" data-en="⚡ Formula for Senior 3">⚡ القوانين</a>
+    <a href="index.html.html#about" onclick="toggleMenu()" data-ar="👩‍🏫 من نحن" data-en="👩‍🏫 About Us">👩‍🏫 من نحن</a>
+    <a href="index.html.html#contact" onclick="toggleMenu()" data-ar="📞 تواصل" data-en="📞 Contact">📞 تواصل</a>
+</div>
