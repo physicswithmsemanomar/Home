@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فيزياء مع أ. إيمان عمر | Physics with Ms. Eman Omar</title>
+<title>Physics with Ms. Eman Omar | فيزياء مع أ. إيمان عمر</title>
 <!-- Social Sharing -->
-<meta property="og:title" content="منصة فيزياء أ. إيمان عمر">
-<meta property="og:description" content="أكاديمية فيزياء تفاعلية متقدمة.">
+<meta property="og:title" content="Ms. Eman Omar Physics Platform">
+<meta property="og:description" content="Advanced Physics Interactive Academy.">
 <meta property="og:image" content="logo-sharing.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="logo-sharing.png">
@@ -15,7 +15,7 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#020818">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="فيزياء مع أ. إيمان عمر">
+<meta name="apple-mobile-web-app-title" content="Physics with Ms. Eman Omar">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -271,22 +271,6 @@ nav.scrolled {
   margin-bottom: 32px;
   animation: fadeSlideUp 0.8s 0.3s ease forwards;
   opacity: 0;
-}
-
-/* Typing Sentences Effect */
-.typing-sentences {
-  min-height: 5.4em; /* Ensure space for multiple lines */
-  overflow: hidden;
-}
-
-.typing-sentences::after {
-  content: '';
-  animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
 }
 
 .hero-stats {
@@ -1478,9 +1462,9 @@ canvas.simulation-canvas { width: 100%; height: 100%; background: transparent; }
       <div class="hero-badge" data-ar="🚀 منصة فيزياء متطورة" data-en="🚀 Advanced Physics Platform">🚀 منصة فيزياء متطورة</div>
       <h1 class="hero-title-ar" data-ar="فيزياء مع أ. إيمان عمر" data-en="Physics with Ms. Eman Omar">فيزياء مع أ. إيمان عمر</h1>
       <div class="hero-title-en" style="display:none">PHYSICS WITH MS. EMAN OMAR</div>
-      
-      <!-- Typing Sentences -->
-      <p class="hero-desc typing-sentences" id="typingSentences"></p>
+      <p class="hero-desc" data-ar="استكشف عالم الفيزياء بطريقة مختلفة — من ميكانيكا الكم إلى النسبية، ومن الثانوية العامة إلى المناهج الدولية." data-en="Explore physics differently — from quantum mechanics to relativity, from high school to international curricula.">
+        استكشف عالم الفيزياء بطريقة مختلفة — من ميكانيكا الكم إلى النسبية، ومن الثانوية العامة إلى المناهج الدولية.
+      </p>
       
       <div class="hero-stats">
         <div class="stat-item"><span class="stat-num" data-count="2500">0</span><span class="stat-label" data-ar="طالب" data-en="Students">طالب</span></div>
@@ -1853,7 +1837,7 @@ canvas.simulation-canvas { width: 100%; height: 100%; background: transparent; }
     <div class="exp-card">
       <div class="exp-header">
         <div class="exp-icon">🔗</div>
-        <div class="exp-title" data-ar="المقاومات على التوالي" data-en="Resistors in Series">المقاومات على التوالي</div>
+        <div class="exp-title" data-ar="المقاومات على التوالي" data-en="Resistors in Series">Resistors in Series</div>
       </div>
       <div class="exp-canvas-wrap">
         <canvas id="seriesCanvas" class="simulation-canvas"></canvas>
@@ -1881,7 +1865,7 @@ canvas.simulation-canvas { width: 100%; height: 100%; background: transparent; }
     <div class="exp-card">
       <div class="exp-header">
         <div class="exp-icon">🔀</div>
-        <div class="exp-title" data-ar="المقاومات على التوازي" data-en="Resistors in Parallel">المقاومات على التوازي</div>
+        <div class="exp-title" data-ar="المقاومات على التوازي" data-en="Resistors in Parallel">Resistors in Parallel</div>
       </div>
       <div class="exp-canvas-wrap">
         <canvas id="parallelCanvas" class="simulation-canvas"></canvas>
@@ -1909,7 +1893,7 @@ canvas.simulation-canvas { width: 100%; height: 100%; background: transparent; }
     <div class="exp-card">
       <div class="exp-header">
         <div class="exp-icon">⚡</div>
-        <div class="exp-title" data-ar="التيار الكهربائي" data-en="Electric Current">التيار الكهربائي</div>
+        <div class="exp-title" data-ar="التيار الكهربائي" data-en="Electric Current">Electric Current</div>
       </div>
       <div class="exp-canvas-wrap">
         <canvas id="currentCanvas" class="simulation-canvas"></canvas>
@@ -2081,7 +2065,7 @@ function openWA(btn, level = '') {
 }
 
 function openGeneralWA() {
-  const msg = "مرحباً، أستاذة. إيمان عمر.  لدي استفسار  حول كورس فيزياء.";
+  const msg = "مرحباً، لدي استفسار عام حول منصة فيزياء أ. إيمان عمر. الرجاء التواصل معي.";
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
@@ -2238,85 +2222,6 @@ const heroObs = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting) { animateCounters(); heroObs.disconnect(); }
 }, { threshold: 0.5 });
 heroObs.observe(document.getElementById('hero'));
-
-/* ============================================
-   TYPING SENTENCES IN HERO
-   ============================================ */
-const sentences = {
-  ar: [
-    "🚀 فيزياء بدون حدود — كن مبتكراً في كل خطوة",
-    "⚡ اكتشف قوة الفهم العميق للطبيعة",
-    "🌟 تكنولوجيا المستقبل تبدأ من هنا",
-    "🎯 من الفضول إلى الاختراع — رحلتك تبدأ الآن",
-    "🧠 الفيزياء ليست مادة، بل طريقة تفكير",
-    "💡 كل سؤال يفتح ألف إمكانية",
-    "🔬 اصنع المستقبل بيديك — ادرس الأساسيات اليوم",
-    "🌌 الكون بانتظارك — استكشفه معنا",
-    "⭐ كن صاحب فكرة غدية من خلال فهم فيزياء اليوم",
-    "🚀 حول شغفك بالعلم إلى مسيرة مهنية ناجحة"
-  ],
-  en: [
-    "🚀 Physics without limits — be innovative at every step",
-    "⚡ Discover the power of deep understanding of nature",
-    "🌟 The technology of tomorrow starts here",
-    "🎯 From curiosity to invention — your journey starts now",
-    "🧠 Physics is not a subject, it's a way of thinking",
-    "💡 Every question opens a thousand possibilities",
-    "🔬 Create the future with your hands — study the basics today",
-    "🌌 The universe is waiting for you — explore it with us",
-    "⭐ Be tomorrow's visionary through today's physics",
-    "🚀 Turn your passion for science into a successful career"
-  ]
-};
-
-let typingTimer = null;
-let typingActive = false;
-
-function typeWriter(element, text, speed = 50) {
-  return new Promise(resolve => {
-    element.textContent = '';
-    let index = 0;
-    const type = () => {
-      if (index < text.length) {
-        element.textContent += text[index++];
-        setTimeout(type, speed);
-      } else {
-        resolve();
-      }
-    };
-    type();
-  });
-}
-
-async function cycleTypingSentences() {
-  const element = document.getElementById('typingSentences');
-  if (!element) return;
-  
-  typingActive = true;
-  
-  while (typingActive) {
-    const lang = isAr ? 'ar' : 'en';
-    const sentenceList = sentences[lang];
-    
-    for (const sentence of sentenceList) {
-      if (!typingActive) return;
-      await typeWriter(element, sentence, 40);
-      await new Promise(r => setTimeout(r, 2500)); // Wait before deleting
-      
-      // Delete effect
-      while (element.textContent.length > 0 && typingActive) {
-        element.textContent = element.textContent.slice(0, -1);
-        await new Promise(r => setTimeout(r, 20));
-      }
-      await new Promise(r => setTimeout(r, 300));
-    }
-  }
-}
-
-// Start typing when page loads
-document.addEventListener('DOMContentLoaded', () => {
-  cycleTypingSentences();
-});
 
 /* ============================================
    FOOTER EQUATION TICKER
@@ -3188,6 +3093,7 @@ function initCurrent() {
   draw();
 }
 
+// Initialize all
 window.addEventListener('load', () => {
   initPendulum();
   initProjectile();

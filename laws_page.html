@@ -58,7 +58,221 @@
             padding-top: 70px; /* Space for fixed navbar */
         }
 
-        /* ===== CANVAS BACKGROUND ===== */
+        /* ===== PRINT STYLES FOR PDF ===== */
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm 20mm 15mm 20mm;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+
+            /* Hide non-content elements */
+            #bg-canvas,
+            .floating-equations,
+            nav,
+            .hero-header,
+            .hero-header-btns,
+            footer,
+            .floating-wa,
+            .section-tag,
+            .section-divider {
+                display: none !important;
+            }
+
+            /* Body adjustments for print - optimized for clarity */
+            body {
+                background: white !important;
+                color: black !important;
+                font-family: 'Times New Roman', 'Arial', serif !important;
+                font-size: 13pt !important; /* Slightly larger for better readability */
+                line-height: 1.5 !important; /* Better line spacing */
+                padding: 0 !important;
+                margin: 0 !important;
+                direction: rtl !important;
+                font-weight: normal !important; /* Ensure normal weight */
+                text-rendering: optimizeLegibility !important; /* Better text rendering */
+            }
+
+            /* Main content adjustments */
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            /* Section header for print */
+            .section-header {
+                text-align: center !important;
+                margin-bottom: 20pt !important;
+                border-bottom: 2pt solid #333 !important;
+                padding-bottom: 10pt !important;
+            }
+
+            .section-title {
+                font-size: 18pt !important;
+                font-weight: bold !important;
+                color: #000 !important;
+                margin: 0 !important;
+            }
+
+            /* Laws container */
+            .laws-container {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            /* Law sections */
+            .law-section {
+                margin-bottom: 15pt !important;
+                page-break-inside: avoid !important;
+            }
+
+            .law-section h2 {
+                font-size: 14pt !important;
+                font-weight: bold !important;
+                color: #000 !important;
+                margin: 10pt 0 8pt 0 !important;
+                border-bottom: 1pt solid #666 !important;
+                padding-bottom: 3pt !important;
+            }
+
+            .law-section h3 {
+                font-size: 12pt !important;
+                font-weight: bold !important;
+                color: #333 !important;
+                margin: 8pt 0 5pt 0 !important;
+            }
+
+            /* Formula boxes - compact and clear for PDF */
+            .formula-box {
+                background: white !important;
+                border: 1.5pt solid #333 !important;
+                border-radius: 4pt !important;
+                padding: 6pt 10pt !important;
+                margin: 4pt 0 !important;
+                font-family: 'Times New Roman', 'Arial', serif !important;
+                font-size: 12pt !important;
+                font-weight: normal !important;
+                text-align: center !important;
+                color: #000 !important;
+                display: block !important;
+                width: fit-content !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                box-shadow: none !important;
+                line-height: 1.4 !important;
+            }
+
+            /* Special handling for MathJax in print */
+            .MathJax {
+                font-size: 11pt !important;
+                color: #000 !important;
+            }
+
+            /* Mobile PDF Instructions */
+            .mobile-instructions {
+                margin-top: 20px;
+                padding: 20px;
+                background: rgba(0, 245, 255, 0.1);
+                border: 1px solid rgba(0, 245, 255, 0.3);
+                border-radius: 10px;
+                text-align: center;
+            }
+
+            .instructions-box h3 {
+                color: var(--neon-cyan);
+                margin-bottom: 15px;
+                font-size: 16px;
+            }
+
+            .instructions-box ol {
+                text-align: right;
+                margin: 0;
+                padding-right: 20px;
+            }
+
+            .instructions-box li {
+                margin-bottom: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+
+            .instructions-box p {
+                margin-top: 15px;
+                color: var(--text-secondary);
+                font-size: 13px;
+            }
+
+            /* Note boxes - more compact */
+            .note-box {
+                background: #fff !important;
+                border-left: 3pt solid #0066cc !important;
+                padding: 3pt 6pt !important;
+                margin: 4pt 0 !important;
+                font-size: 10pt !important;
+                color: #333 !important;
+                line-height: 1.3 !important;
+            }
+
+            /* Tables for print - clearer */
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                margin: 6pt 0 !important;
+                font-size: 11pt !important;
+                font-family: 'Times New Roman', serif !important;
+            }
+
+            th, td {
+                border: 1.5pt solid #333 !important;
+                padding: 4pt !important;
+                text-align: center !important;
+                font-weight: normal !important;
+            }
+
+            th {
+                background: #f0f0f0 !important;
+                font-weight: bold !important;
+                font-size: 11pt !important;
+            }
+
+            /* Lists */
+            ul, ol {
+                padding-right: 15pt !important;
+                margin: 3pt 0 !important;
+            }
+
+            li {
+                margin-bottom: 2pt !important;
+                font-size: 10pt !important;
+                line-height: 1.3 !important;
+            }
+
+            /* Page breaks */
+            .law-section {
+                page-break-inside: avoid !important;
+            }
+
+            .law-section h2 {
+                page-break-after: avoid !important;
+            }
+
+            /* Enhanced text rendering for clarity */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                text-rendering: optimizeLegibility !important;
+                -webkit-font-smoothing: antialiased !important;
+                -moz-osx-font-smoothing: grayscale !important;
+            }
+
+            /* Ensure all Arabic text is clear */
+            [dir="rtl"], .formula-box, .note-box, p, li, td {
+                font-family: 'Times New Roman', 'Arial', serif !important;
+                font-weight: normal !important;
+                letter-spacing: normal !important;
+            }
+        }
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -747,9 +961,6 @@
                 color: #000000 !important;
                 text-decoration: underline !important;
             }
-            .section-title, .section-tag, .law-section h2, .law-section h3 {
-                color: #000000 !important;
-            }
         }
     </style>
 </head>
@@ -780,7 +991,7 @@
         </ul>
 
         <div style="display:flex;gap:10px;align-items:center;">
-          <button class="lang-toggle" onclick="toggleLang()">EN / عر</button>
+          <button class="lang-toggle" onclick="toggleLang()" data-ar="EN / English" data-en="عر / العربية">EN / عر</button>
           <div class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
           </div>
@@ -806,29 +1017,53 @@
         <!-- ===== HERO HEADER ===== -->
         <section class="hero-header">
             <div class="hero-header-content">
-                <h1>📘 Formula for Senior 3</h1>
-                <p>
-                    ملخص شامل لجميع قوانين وصيغ الفيزياء للصف الثالث الثانوي
-                    <br>
-                    Complete formulas and laws for Grade 3 secondary physics
-                </p>
+                <h1 data-ar="📘 قوانين الصف الثالث الثانوي" data-en="📘 Formula for Senior 3">📘 Formula for Senior 3</h1>
+                <p data-ar="ملخص شامل لجميع قوانين وصيغ الفيزياء للصف الثالث الثانوي" data-en="Complete formulas and laws for Grade 3 secondary physics">Complete formulas and laws for Grade 3 secondary physics</p>
                 <div class="hero-header-btns">
-                    <a href="#laws-content" class="btn-primary">استكشف القوانين ⚡ | Explore Laws</a>
-                    <button id="printLawsButton" class="btn-primary" type="button">طباعة القوانين كـ PDF | Print PDF</button>
-                    <a href="index.html.html#courses" class="btn-outline">العودة للكورسات | Back to Courses</a>
+                    <a href="#laws-content" class="btn-primary" data-ar="استكشف القوانين ⚡" data-en="Explore Laws ⚡">استكشف القوانين ⚡ | Explore Laws</a>
+                    <button id="printLawsButton" class="btn-primary" type="button" data-ar="طباعة القوانين كـ PDF" data-en="Print PDF">طباعة القوانين كـ PDF | Print PDF</button>
+                    <a href="index.html#courses" class="btn-outline" data-ar="العودة للكورسات" data-en="Back to Courses">العودة للكورسات | Back to Courses</a>
+                </div>
+
+                <!-- Mobile PDF Instructions -->
+                <div id="mobile-pdf-instructions" class="mobile-instructions" style="display: none;">
+                    <div class="instructions-box">
+                        <h3>📱 تعليمات إنشاء PDF على الهاتف المحمول</h3>
+                        <ol>
+                            <li>اضغط على زر "مشاركة" في المتصفح (أيقونة المربع مع السهم)</li>
+                            <li>اختر "طباعة" أو "Print"</li>
+                            <li>غير الوجهة إلى "حفظ كـ PDF" أو "Save as PDF"</li>
+                            <li>اضغط على "حفظ" أو "Save"</li>
+                        </ol>
+                        <p><strong>نصيحة:</strong> استخدم متصفح Chrome أو Safari لأفضل النتائج</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- ===== LAWS CONTENT ===== -->
+        <div id="pdf-title-page" style="display: none;">
+            <div style="text-align: center; padding: 50pt 20pt; page-break-after: always;">
+                <h1 style="font-size: 24pt; font-weight: bold; margin-bottom: 20pt; color: #000;">قوانين الفيزياء</h1>
+                <h2 style="font-size: 18pt; font-weight: bold; margin-bottom: 30pt; color: #333;">الصف الثالث الثانوي</h2>
+                <div style="font-size: 14pt; margin-bottom: 20pt; color: #666;">
+                    ملخص شامل لجميع القوانين والمعادلات
+                </div>
+                <div style="font-size: 12pt; color: #999;">
+                    فيزياء أ. إيمان عمر
+                </div>
+                <div style="font-size: 10pt; color: #ccc; margin-top: 40pt;">
+                    تم إنشاء هذا الملف في: <span id="pdf-date"></span>
+                </div>
+            </div>
+        </div>
+
         <section id="laws-content">
             <div class="section-header">
-                <div class="section-tag">📘 Formula for Senior 3</div>
-                <h1 class="section-title">قوانين الصف الثالث الثانوي العام</h1>
+                <div class="section-tag" data-ar="📘 قوانين الصف الثالث" data-en="📘 Formula for Senior 3">📘 Formula for Senior 3</div>
+                <h1 class="section-title" data-ar="قوانين الصف الثالث الثانوي العام" data-en="General Secondary Physics Laws">قوانين الصف الثالث الثانوي العام</h1>
                 <div class="section-divider"></div>
-                <p style="color: var(--text-secondary); margin-top: 16px; font-size: 16px;">
-                    ملخص شامل لجميع القوانين والمعادلات — كهربية، مغناطيسية، وفيزياء حديثة
-                </p>
+                <p style="color: var(--text-secondary); margin-top: 16px; font-size: 16px;" data-ar="ملخص شامل لجميع القوانين والمعادلات — كهربية، مغناطيسية، وفيزياء حديثة" data-en="Complete summary of all laws and equations — electrical, magnetic, and modern physics">ملخص شامل لجميع القوانين والمعادلات — كهربية، مغناطيسية، وفيزياء حديثة</p>
             </div>
 
             <div class="laws-container">
@@ -1158,31 +1393,97 @@
     <!-- ===== FOOTER ===== -->
     <footer>
         <div class="footer-logo">
-            <div class="logo-en">📘 FORMULA FOR SENIOR 3</div>
-            <div class="logo-ar">قوانين الصف الثالث الثانوي</div>
+            <div class="logo-en" data-ar="قوانين الصف الثالث الثانوي" data-en="FORMULA FOR SENIOR 3">FORMULA FOR SENIOR 3</div>
+            <div class="logo-ar" data-ar="قوانين الصف الثالث الثانوي" data-en="Formula for Senior 3">قوانين الصف الثالث الثانوي</div>
         </div>
         <div class="footer-links">
-            <a href="index.html.html#hero">الرئيسية | Home</a>
-            <a href="index.html.html#courses">الكورسات | Courses</a>
-            <a href="index.html.html#experiments">التجارب | Labs</a>
-            <a href="index.html.html#about">من نحن | About</a>
-            <a href="index.html.html#contact">تواصل | Contact</a>
+            <a href="index.html#hero" data-ar="الرئيسية" data-en="Home">الرئيسية | Home</a>
+            <a href="index.html#courses" data-ar="الكورسات" data-en="Courses">الكورسات | Courses</a>
+            <a href="index.html#experiments" data-ar="التجارب" data-en="Labs">التجارب | Labs</a>
+            <a href="index.html#about" data-ar="من نحن" data-en="About">من نحن | About</a>
+            <a href="index.html#contact" data-ar="تواصل" data-en="Contact">تواصل | Contact</a>
+            <a href="https://wa.me/201202906502" target="_blank" style="color: var(--whatsapp-green);" title="WhatsApp: +20 120 290 6502">
+              <i class="fab fa-whatsapp"></i> <span data-ar="WhatsApp" data-en="WhatsApp">WhatsApp</span>
+            </a>
         </div>
         <div class="footer-copy">
-            © 2024 منصة فيزياء أ. إيمان عمر - جميع الحقوق محفوظة ✨
+            © 2024 منصة فيزياء أ. إيمان عمر - جميع الحقوق محفوظة | واتسآب: +20 120 290 6502 ✨
             <br>
-            © 2024 Ms. Eman Omar Physics Platform - All Rights Reserved ✨
+            © 2024 Ms. Eman Omar Physics Platform - All Rights Reserved | WhatsApp: +20 120 290 6502 ✨
         </div>
     </footer>
 
     <!-- ===== FLOATING WHATSAPP ===== -->
-    <a href="https://wa.me/201234567890?text=مرحبا%20أستاذة%20إيمان%20%F0%9F%93%9A" class="floating-wa" target="_blank">
+    <a href="#" onclick="openCoursesWA(); return false;" class="floating-wa" target="_blank">
         <i class="fab fa-whatsapp"></i>
         <span class="floating-wa-label">تواصل معنا | Contact Us</span>
     </a>
 
     <!-- Canvas Background Script -->
     <script>
+        // ===== LANGUAGE SYSTEM =====
+        let isAr = localStorage.getItem('language') === 'ar' ? true : false;
+
+        function updateLanguageContent() {
+          // Update all elements with data-ar and data-en
+          document.querySelectorAll('[data-ar], [data-en]').forEach(el => {
+            const arText = el.getAttribute('data-ar');
+            const enText = el.getAttribute('data-en');
+            
+            if (!arText && !enText) return;
+            
+            const displayText = isAr ? arText : enText;
+            
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+              el.setAttribute('placeholder', displayText || '');
+            } else if (el.tagName === 'A' || el.tagName === 'BUTTON' || el.classList.contains('lang-toggle')) {
+              if (!el.querySelector('[data-ar]')) {
+                el.textContent = displayText || el.textContent;
+              }
+            } else if (!el.querySelector('[data-ar]')) {
+              el.textContent = displayText || el.textContent;
+            }
+          });
+
+          // Update language button
+          const langBtn = document.querySelector('.lang-toggle');
+          if (langBtn) {
+            langBtn.textContent = isAr ? "EN / English" : "عر / العربية";
+          }
+
+          // Update HTML attributes
+          document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+          document.documentElement.setAttribute('lang', isAr ? 'ar' : 'en');
+          document.body.style.direction = isAr ? 'rtl' : 'ltr';
+        }
+
+        function toggleLang() {
+          isAr = !isAr;
+          localStorage.setItem('language', isAr ? 'ar' : 'en');
+          updateLanguageContent();
+        }
+
+        // Initialize language
+        document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+        document.documentElement.setAttribute('lang', isAr ? 'ar' : 'en');
+        document.body.style.direction = isAr ? 'rtl' : 'ltr';
+        updateLanguageContent();
+
+        // Dictionary for untranslated content
+        const translationDict = {
+          'استكشف القوانين ⚡': { ar: 'استكشف القوانين ⚡', en: 'Explore Laws ⚡' },
+          'طباعة القوانين كـ PDF': { ar: 'طباعة القوانين كـ PDF', en: 'Print PDF' },
+          'العودة للكورسات': { ar: 'العودة للكورسات', en: 'Back to Courses' },
+        };
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('open');
+            }
+        }
+
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -1258,10 +1559,208 @@
 
         createFloatingEquations();
 
+        // Show mobile instructions if on mobile
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const mobileInstructions = document.getElementById('mobile-pdf-instructions');
+        if (mobileInstructions && isMobile) {
+            mobileInstructions.style.display = 'block';
+        }
+
         const printLawsButton = document.getElementById('printLawsButton');
         if (printLawsButton) {
             printLawsButton.addEventListener('click', () => {
-                window.print();
+                // Show loading message
+                const originalText = printLawsButton.textContent;
+                printLawsButton.textContent = isAr ? 'جاري تحميل الملف...' : 'Loading PDF...';
+                printLawsButton.disabled = true;
+
+                // Create a link element and trigger download
+                const link = document.createElement('a');
+                link.href = 'قوانين_الفيزياء_الصف_الثالث_الثانوي_كاملة.pdf';
+                link.download = 'قوانين_الفيزياء_الصف_الثالث_الثانوي_كاملة.pdf';
+                
+                // Trigger the download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Reset button after a short delay
+                setTimeout(() => {
+                    printLawsButton.textContent = originalText;
+                    printLawsButton.disabled = false;
+                    console.log('✓ تم تحميل ملف PDF بنجاح');
+                }, 500);
+            });
+        }
+
+        // WhatsApp Courses Dialog Function
+        const courses = [
+            { 
+                ar: "فيزياء الثانوية العامة", 
+                en: "General Secondary Physics",
+                msgAr: "مرحباً أ. إيمان،\n\nأود الاستفسار عن كورس فيزياء الثانوية العامة والحجز عليه.\nالرجاء إرسال التفاصيل والأسعار والجدول الزمني.",
+                msgEn: "Hello Ms. Eman,\n\nI would like to inquire about the General Secondary Physics course and book a seat.\nPlease send me the details, prices, and schedule."
+            },
+            { 
+                ar: "فيزياء مدارس اللغات", 
+                en: "Language Schools Physics",
+                msgAr: "مرحباً أ. إيمان،\n\nأود الاستفسار عن كورس فيزياء مدارس اللغات والحجز عليه.\nالرجاء إرسال التفاصيل والأسعار والجدول الزمني.",
+                msgEn: "Hello Ms. Eman,\n\nI would like to inquire about the Language Schools Physics course and book a seat.\nPlease send me the details, prices, and schedule."
+            },
+            { 
+                ar: "فيزياء المناهج الخليجية", 
+                en: "GCC Curriculum Physics",
+                msgAr: "مرحباً أ. إيمان،\n\nأود الاستفسار عن كورس فيزياء المناهج الخليجية والحجز عليه.\nالرجاء إرسال التفاصيل والأسعار والجدول الزمني.",
+                msgEn: "Hello Ms. Eman,\n\nI would like to inquire about the GCC Curriculum Physics course and book a seat.\nPlease send me the details, prices, and schedule."
+            },
+            { 
+                ar: "IGCSE فيزياء", 
+                en: "IGCSE Physics",
+                msgAr: "مرحباً أ. إيمان،\n\nأود الاستفسار عن كورس IGCSE فيزياء والحجز عليه.\nالرجاء إرسال التفاصيل والأسعار والجدول الزمني.",
+                msgEn: "Hello Ms. Eman,\n\nI would like to inquire about the IGCSE Physics course and book a seat.\nPlease send me the details, prices, and schedule."
+            },
+            { 
+                ar: "IB والدبلوم الأمريكي", 
+                en: "IB & American Diploma Physics",
+                msgAr: "مرحباً أ. إيمان،\n\nأود الاستفسار عن كورس IB والدبلوم الأمريكي والحجز عليه.\nالرجاء إرسال التفاصيل والأسعار والجدول الزمني.",
+                msgEn: "Hello Ms. Eman,\n\nI would like to inquire about the IB & American Diploma Physics course and book a seat.\nPlease send me the details, prices, and schedule."
+            },
+            { 
+                ar: "الفيزياء للمشاريع التكنولوجية", 
+                en: "Physics for Tech Projects",
+                msgAr: "مرحباً أ. إيمان،\n\nأود الاستفسار عن كورس الفيزياء للمشاريع التكنولوجية والحجز عليه.\nالرجاء إرسال التفاصيل والأسعار والجدول الزمني.",
+                msgEn: "Hello Ms. Eman,\n\nI would like to inquire about the Physics for Tech Projects course and book a seat.\nPlease send me the details, prices, and schedule."
+            },
+            { 
+                ar: "فيزياء الكليات والهندسة", 
+                en: "University & Engineering Physics",
+                msgAr: "مرحباً أ. إيمان،\n\nأود الاستفسار عن كورس فيزياء الكليات والهندسة والحجز عليه.\nالرجاء إرسال التفاصيل والأسعار والجدول الزمني.",
+                msgEn: "Hello Ms. Eman,\n\nI would like to inquire about the University & Engineering Physics course and book a seat.\nPlease send me the details, prices, and schedule."
+            },
+            { 
+                ar: "SAT Physics", 
+                en: "SAT Physics Prep",
+                msgAr: "مرحباً أ. إيمان،\n\nأود الاستفسار عن كورس SAT فيزياء والحجز عليه.\nالرجاء إرسال التفاصيل والأسعار والجدول الزمني.",
+                msgEn: "Hello Ms. Eman,\n\nI would like to inquire about the SAT Physics Prep course and book a seat.\nPlease send me the details, prices, and schedule."
+            }
+        ];
+
+        function openCoursesWA() {
+            // Create modal HTML
+            const modalHTML = `
+                <div id="coursesModal" style="
+                    position: fixed;
+                    top: 0; left: 0;
+                    width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.7);
+                    z-index: 10000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    direction: ${isAr ? 'rtl' : 'ltr'};
+                ">
+                    <div style="
+                        background: white;
+                        border-radius: 16px;
+                        padding: 30px;
+                        max-width: 500px;
+                        width: 90%;
+                        max-height: 80vh;
+                        overflow-y: auto;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                        animation: slideIn 0.3s ease;
+                    ">
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <h2 style="color: #020818; margin: 0 0 8px 0; font-size: 24px; font-family: 'Cairo';">
+                                ${isAr ? '📚 اختر الكورس' : '📚 Select a Course'}
+                            </h2>
+                            <p style="color: #666; margin: 0; font-size: 14px;">
+                                ${isAr ? 'سيتم توصيلك مباشرة بالأستاذة إيمان عمر' : 'You will be connected directly to Ms. Eman Omar'}
+                            </p>
+                        </div>
+                        
+                        <div id="coursesList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                        
+                        <button onclick="document.getElementById('coursesModal').remove()" style="
+                            width: 100%;
+                            margin-top: 20px;
+                            padding: 12px;
+                            background: #f0f0f0;
+                            border: none;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-family: 'Cairo';
+                            color: #666;
+                            font-weight: 600;
+                            transition: all 0.3s;
+                        " onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='#f0f0f0'">
+                            ${isAr ? 'إغلاق' : 'Close'}
+                        </button>
+                    </div>
+                </div>
+                
+                <style>
+                    @keyframes slideIn {
+                        from {
+                            opacity: 0;
+                            transform: translateY(-20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                </style>
+            `;
+            
+            // Add modal to page
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // Add course buttons
+            const coursesList = document.getElementById('coursesList');
+            courses.forEach((course) => {
+                const btn = document.createElement('button');
+                btn.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 20px;">🎓</span>
+                        <div style="flex: 1; text-align: ${isAr ? 'right' : 'left'};">
+                            <div style="font-weight: 600; color: #020818; font-family: 'Cairo';">
+                                ${isAr ? course.ar : course.en}
+                            </div>
+                        </div>
+                        <span style="color: #00c292;">→</span>
+                    </div>
+                `;
+                btn.style.cssText = `
+                    padding: 14px 16px;
+                    background: #f9f9f9;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    font-family: 'Cairo';
+                    font-size: 14px;
+                    transition: all 0.3s;
+                    text-align: ${isAr ? 'right' : 'left'};
+                `;
+                btn.onmouseover = function() {
+                    this.style.background = '#00c292';
+                    this.style.color = 'white';
+                    this.style.borderColor = '#00c292';
+                    this.style.transform = isAr ? 'translateX(-5px)' : 'translateX(5px)';
+                };
+                btn.onmouseout = function() {
+                    this.style.background = '#f9f9f9';
+                    this.style.color = '#020818';
+                    this.style.borderColor = '#e0e0e0';
+                    this.style.transform = 'translateX(0)';
+                };
+                btn.onclick = () => {
+                    const message = isAr ? course.msgAr : course.msgEn;
+                    const whatsappUrl = `https://wa.me/201202906502?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    document.getElementById('coursesModal').remove();
+                };
+                coursesList.appendChild(btn);
             });
         }
     </script>
